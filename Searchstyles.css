@@ -1,0 +1,167 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F0;
+    /* font-family: Inter; */
+}
+
+/* Product Section */
+.product-container {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 50px;
+}
+.product {
+    background-color: #879283;
+    padding: 15px;
+    text-align: center;
+    width: 180px;
+    border-radius: 10px;
+}
+.product img {
+    width: 100%;
+    border-radius: 10px;
+    width: 170px;  /* Set the width */
+    height: 200px; /* Set the height */
+    object-fit: cover;
+}
+.product-name {
+    color: #ffffff;
+    margin: 10px 0;
+}
+.product-price {
+    color: #ffffff;
+    font-size: 16px;
+}
+/*------- Search Page -------*/
+.underline{
+    text-decoration-line: underline;
+}
+
+.search_container{
+    background-color: #CAC5BC;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    color: #5B4C48;
+    font-weight: bold;
+}
+
+.search_box {
+    display: flex;
+    background: #E7E7E7;
+    border-radius: 5px;
+}
+
+.search_bar {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    background: #E7E7E7;
+    outline: none;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search_button{
+    background: #E7E7E7;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.filters {
+    color: #5B4C48;
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 35px;
+    width: 100%;
+    max-width: 1000px;
+}
+.filter {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+    margin-right: 50px;
+}
+
+select, input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    background: #E7E7E7;
+    outline: none;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #E7E7E7;
+}
+.price-range {
+    display: flex;
+    align-items: left;
+    gap: 10px;
+}
+.price-range input {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    background: #eae9e7;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+.price-range span {
+     font-size: 18px;
+    color: #4f4239;
+ }
+
+/*------- End Search Page -------*/
+/* Footer Section */
+.footer {
+    background-color: #685752;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    
+}
+
+.last-footer {
+    text-align: center;
+}
+
+/* Ensure each column has equal width */
+.footer-column {
+    flex: 1;
+    padding: 0 20px;
+}
+
+/* Style links */
+.footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+}
