@@ -37,6 +37,9 @@ body {
     text-decoration: none;
    
 }
+.search-icon img {
+    width: 25px;
+}
 
 /* Header Section */
 .header {
