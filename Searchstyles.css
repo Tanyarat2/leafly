@@ -15,6 +15,7 @@ body {
     gap: 15px;
     padding: 50px;
 }
+
 .product {
     background-color: #879283;
     padding: 15px;
@@ -22,27 +23,60 @@ body {
     width: 180px;
     border-radius: 10px;
 }
+
 .product img {
     width: 100%;
     border-radius: 10px;
-    width: 170px;  /* Set the width */
-    height: 200px; /* Set the height */
+    width: 170px;
+    /* Set the width */
+    height: 200px;
+    /* Set the height */
     object-fit: cover;
 }
+
 .product-name {
     color: #ffffff;
     margin: 10px 0;
 }
+
 .product-price {
     color: #ffffff;
     font-size: 16px;
 }
+
 /*------- Search Page -------*/
-.underline{
-    text-decoration-line: underline;
+
+h2 {
+    color: #5B4C48;
+    font-weight: bold;
 }
 
-.search_container{
+h2.underline {
+    text-decoration: underline;
+    color: #5B4C48;
+}
+
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn img {
+    width: 35px;
+    height: 35px;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+}
+
+/*--- Search container ---*/
+.container {
     background-color: #CAC5BC;
     padding: 20px;
     text-align: left;
@@ -50,89 +84,108 @@ body {
     flex-direction: column;
 }
 
-h2 {
+label {
     color: #5B4C48;
-    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-.search_box {
-    display: flex;
-    background: #E7E7E7;
-    border-radius: 5px;
-}
-
-.search_bar {
-    flex: 1;
-    padding: 10px;
+select,
+input {
+    padding: 13px;
     font-size: 16px;
     background: #E7E7E7;
     outline: none;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
 }
 
-.search_button{
-    background: #E7E7E7;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
+.button-only {
+    align-self: end;
+}
+
+.search_button {
+    width: 60px;
     padding: 10px;
+    background-color: #eae9e7;
     color: white;
-    border-radius: 0 5px 5px 0;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-.filters {
-    color: #5B4C48;
-    font-size: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 35px;
-    width: 100%;
-    max-width: 1000px;
-}
-.filter {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 200px;
-    margin-right: 50px;
-}
-
-select, input {
-    flex: 1;
-    padding: 10px;
     font-size: 16px;
-    background: #E7E7E7;
-    outline: none;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background: #E7E7E7;
-}
-.price-range {
-    display: flex;
-    align-items: left;
-    gap: 10px;
-}
-.price-range input {
-    width: 100px;
-    padding: 10px;
     border: none;
     border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.search_button img {
+    width: 25px;
+    height: 25px;
+}
+
+.search_button:hover {
+    background-color: #d7d7d7;
+
+}
+
+/* Filter Row: Collection + Price Range */
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.filter-row .form-item {
+    flex: 1;
+    min-width: 220px;
+}
+
+.price-wrapper .price-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-range span {
+    font-size: 18px;
+    color: #5B4C48;
+}
+
+.price-range input {
+    width: 150px;
+}
+
+
+/* Form Grid Layout */
+.form-item {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-item select {
+    color: gray;
+    height: 45px;
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
     background: #eae9e7;
     text-align: center;
     font-size: 16px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
     outline: none;
+    width: 100%
 }
-.price-range span {
-     font-size: 18px;
-    color: #4f4239;
- }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+
 
 /*------- End Search Page -------*/
 /* Footer Section */
@@ -144,7 +197,7 @@ select, input {
     display: flex;
     justify-content: space-between;
     text-align: left;
-    
+
 }
 
 .last-footer {
@@ -165,3 +218,7 @@ select, input {
     font-style: italic;
     text-decoration: underline;
 }
+
+
+
+
