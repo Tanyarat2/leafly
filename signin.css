@@ -77,6 +77,10 @@ textarea {
    
 }
 
+.search-icon img {
+    width: 25px;
+}
+
 /* Header Section */
 .header {
     text-align: center;
