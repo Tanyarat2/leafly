@@ -5,127 +5,118 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="Searchstyles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <div class="underline">
-        <title>Advanced Search</title>
-    </div>
+    <title>Advanced Search</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="search-wrapper">
-            <button type="button" class="close-btn" onclick="closeSearch()"><img src="close.png"></button>
+        <div class="search_header">
+            <h2 class="underline">Advanced Search</h2>
+            <button type="button" class="close_btn" onclick="closeSearch()">
+                <img src="close.png">
+            </button>
+        </div>
 
-            <div class="search-section">
-                <div class="search-header">
-                    <h2 class="underline">Advanced Search</h2>
-                </div>
-                <form class="search-form" action="/search" method="GET">
-                    <div class="form-grid">
-
-                        <!-- Keyword -->
-                        <div class="form-item">
-                            <label for="keyword">Keyword</label>
-                            <input type="text" id="keyword" name="keyword" placeholder="e.g. dog, flower" required />
-                        </div>
-
-                        <!-- iPhone Model -->
-                        <div class="form-item">
-                            <label for="model">iPhone Model</label>
-                            <select id="model" name="model" required>
-                                <option value="">iPhone Model..</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                            </select>
-                        </div>
-
-                        <!-- Color -->
-                        <div class="form-item">
-                            <label for="color">Color</label>
-                            <select id="color" name="color" required>
-                                <option value="">Color..</option>
-                                <option>Yellow</option>
-                                <option>Red</option>
-                                <option>Pink</option>
-                                <option>Grey</option>
-                                <option>Mint</option>
-                                <option>Green</option>
-                                <option>Orange</option>
-                                <option>Purple</option>
-                                <option>Brown</option>
-                                <option>Blue</option>
-                            </select>
-                        </div>
-
-                        <!-- Search Button -->
-                        <div class="form-item button-only">
-                            <button type="submit" class="search_button"><img src="searchBrown.png"></button>
-                        </div>
+        <div class="search-center-wrapper">
+            <form class="search-form" action="/search" method="GET">
+                <div class="form-grid-2rows">
+                    <!-- Row 1 -->
+                    <div class="form-item keyword">
+                        <label for="keyword">Keyword</label>
+                        <input type="text" id="keyword" name="keyword" placeholder="e.g. dog, flower" required />
                     </div>
-                </form>
 
+                    <div class="form-item model">
+                        <label for="model">iPhone Model</label>
+                        <select id="model" name="model" required>
+                            <option value="">iPhone Model..</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                        </select>
+                    </div>
 
-                <div class="filter-row">
-                    <!-- Collection Filter -->
-                    <div class="form-item">
+                    <div class="form-item color">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" required>
+                            <option value="">Color..</option>
+                            <option>Yellow</option>
+                            <option>Red</option>
+                            <option>Pink</option>
+                            <option>Grey</option>
+                            <option>Mint</option>
+                            <option>Green</option>
+                            <option>Orange</option>
+                            <option>Purple</option>
+                            <option>Brown</option>
+                            <option>Blue</option>
+                        </select>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="form-item collection">
                         <label for="collection">Collection</label>
-                        <select id="collection" name="collection">
+                        <select id="collection" name="collection" required>
                             <option value="">Select Collection</option>
                             <option value="Samote">Samote</option>
                         </select>
                     </div>
 
-                    <!-- Price Range Filter -->
-                    <div class="form-item price-wrapper">
-                        <label for="price">Price-range</label>
+                    <div class="form-item price">
+                        <label>Price-range</label>
                         <div class="price-range">
-                            <input type="number" min="0" max="99999" placeholder="0">
+                            <input type="number" min="0" placeholder="0" required>
                             <span>⎯</span>
-                            <input type="number" min="0" max="99999" placeholder="99999">
+                            <input type="number" min="0" placeholder="99999" required>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Search Button -->
+                <div class="search-button-wrapper">
+                    <button type="submit" class="search_button">Search</button>
+                </div>
+            </form>
         </div>
     </div>
 
-            <!-- Displayed products section -->
-            <div class="product-container">
-                <div class="product">
-                    <img src="cat.jpg" alt="Magenta Cat">
-                    <p class="product-name">Magenta Cat</p>
-                    <p class="product-price">฿2,000</p>
-                </div>
-                <div class="product">
-                    <img src="golden.jpg" alt="Pink Golden">
-                    <p class="product-name">Pink Golden</p>
-                    <p class="product-price">฿1,000</p>
-                </div>
+    <!-- Displayed products section -->
+    <div class="product-container">
+        <div class="product">
+            <img src="cat.jpg" alt="Magenta Cat">
+            <p class="product-name">Magenta Cat</p>
+            <p class="product-price">฿2,000</p>
+        </div>
+        <div class="product">
+            <img src="golden.jpg" alt="Pink Golden">
+            <p class="product-name">Pink Golden</p>
+            <p class="product-price">฿1,000</p>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+    <div class="footer">
+        <div class="footer-column">
+            <h3><a href="team.html">Samote</a></h3>
+            <h4>About us:</h4>
+            <p>Samote is a passionate group of university students on a mission to make the world a better
+                place—one
+                innovative idea at a time!</p>
+        </div>
+        <div class="footer-column">
+            <h3>Leafly</h3>
+            <h4>What is Leafly:</h4>
+            <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the
+                community.</p>
+        </div>
+        <div class="footer-column">
+            <div class="last-footer">
+                <h1>Leafly <br> by <br> Samote</h3>
+                    <h5><a href="login.html"><br>for Administrator</a></h5>
             </div>
 
-            <!-- Footer section -->
-            <div class="footer">
-                <div class="footer-column">
-                    <h3><a href="team.html">Samote</a></h3>
-                    <h4>About us:</h4>
-                    <p>Samote is a passionate group of university students on a mission to make the world a better
-                        place—one
-                        innovative idea at a time!</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Leafly</h3>
-                    <h4>What is Leafly:</h4>
-                    <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the
-                        community.</p>
-                </div>
-                <div class="footer-column">
-                    <div class="last-footer">
-                        <h1>Leafly <br> by <br> Samote</h3>
-                            <h5><a href="login.html"><br>for Administrator</a></h5>
-                    </div>
-
-                </div>
-            </div>
+        </div>
+    </div>
 
 </body>
 
