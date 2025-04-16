@@ -8,6 +8,13 @@
     <title>Advanced Search</title>
 </head>
 
+ <!-- Navbar -->
+ <div class="navbar">
+    <a href="home.html"><img src="home.png" alt="Menu"></a>
+    <span class="search-icon"><a href="SearchPage.html"><img src="search.png"></a></span>
+</div>
+
+<!-- Search -->
 <body>
     <div class="container">
         <div class="search_header">
@@ -24,13 +31,15 @@
                 <div class="form-grid-2rows">
                     <!-- Row 1 -->
                     <div class="form-item keyword">
+                        <!-- Keyword -->
                         <label for="keyword">Keyword</label>
-                        <input type="text" id="keyword" name="keyword" placeholder="e.g. dog, flower" required />
+                        <input type="text" id="keyword" name="keyword" placeholder="e.g. cat"/>
                     </div>
 
                     <div class="form-item model">
+                          <!-- model -->
                         <label for="model">iPhone Model</label>
-                        <select id="model" name="model" required>
+                        <select id="model" name="model">
                             <option value="">iPhone Model..</option>
                             <option value="14">14</option>
                             <option value="15">15</option>
@@ -39,8 +48,9 @@
                     </div>
 
                     <div class="form-item color">
+                          <!-- Color -->
                         <label for="color">Color</label>
-                        <select id="color" name="color" required>
+                        <select id="color" name="color">
                             <option value="">Color..</option>
                             <option>Yellow</option>
                             <option>Red</option>
@@ -56,20 +66,22 @@
                     </div>
 
                     <!-- Row 2 -->
-                    <div class="form-item collection">
+                    <div class="form-item collection"> 
+                         <!-- collection -->
                         <label for="collection">Collection</label>
-                        <select id="collection" name="collection" required>
+                        <select id="collection" name="collection">
                             <option value="">Select Collection</option>
                             <option value="Samote">Samote</option>
                         </select>
                     </div>
 
                     <div class="form-item price">
+                        <!-- Price-range -->
                         <label>Price-range</label>
                         <div class="price-range">
-                            <input type="number" min="0" placeholder="0" required>
+                            <input type="number" min="0" placeholder="0">
                             <span>⎯</span>
-                            <input type="number" min="0" placeholder="99999" required>
+                            <input type="number" min="0" placeholder="99999">
                         </div>
                     </div>
                 </div>
