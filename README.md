@@ -1,1 +1,14 @@
 # leafly
+
+ไปเชื่อมserver ในดาต้าเบสตามนี้
+
+
+PORT=4000
+
+DB_HOST=localhost
+DB_USER=Samote
+DB_PASSWORD=Hellosamote1234***
+DB_NAME=sec3_gr4_database
+****
+
+
