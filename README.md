@@ -1,4 +1,5 @@
 # leafly
+http://localhost:4000/
 
 ไปเชื่อมserver ในดาต้าเบสตามนี้
 
