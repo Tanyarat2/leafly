@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const mysql = require("mysql2");
+const multer = require('multer');
 
 const app = express();
 dotenv.config();
@@ -10,6 +11,8 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "html")));
+app.use(express.static('public'));
+
 
 const session = require('express-session');
 
@@ -38,12 +41,13 @@ connection.connect((err) => {
 
 
 
-// login page
+// --------login page-----------
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/html/login.html"));
   console.log('Request at ', req.url)
 });
 
+// Collect login information
 app.post("/admin-login", function (req, res) {
   const loginTime = new Date().toISOString().slice(0, 19).replace("T", " ");
   const { admin_id, password } = req.body;
@@ -53,7 +57,7 @@ app.post("/admin-login", function (req, res) {
     return res.redirect('/'); // 
   }
 
-  // ดึงข้อมูลชื่อแอดมินจาก Admin_info
+  //Get first name and last name from Admin_info table where that admin_id that login
   const adminInfoSql = `SELECT * FROM Admin_info WHERE admin_id = ?`;
   connection.query(adminInfoSql, [admin_id], (err, adminResults) => {
     if (err) {
@@ -66,14 +70,14 @@ app.post("/admin-login", function (req, res) {
       const adminName = `${adminResults[0].First_Name} ${adminResults[0].Last_Name}`;
       console.log(`Request at ${req.url}`);
 
-      // ตรวจสอบข้อมูลการล็อกอิน
+      // Check admin_id and password
       const sql = `SELECT * FROM Admin_login WHERE admin_id = ? AND Password = ?`;
       connection.query(sql, [admin_id, password], (error, results) => {
         if (results.length > 0) {
           req.session.admin_id = admin_id; // collect admin_id to session
           //res.json({ success: true, message: 'Login successful' });
           
-          // insert into login table
+          // insert into login table in database
           const loginsql = `
             INSERT INTO Admin_login (admin_id, Password, Login_Time)
             VALUES (?, ?, ?)
@@ -98,34 +102,6 @@ app.post("/admin-login", function (req, res) {
     }
   });
 });
-
-
-// Signin page
-app.get("/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "/html/signin.html"));
-  console.log('Request at ', req.url)
-});
-
-// Create account  ------- ค่อยดูว่าจะเก้บใส่ดาต้าเบสไหม
-app.post("/create-acc", function (req, res) {
-  const firstname = req.body.firstname;
-
-  console.log(`Request at ${req.url}`)
-  console.log(`${firstname} create account sucessful`);
-
-});
-
-//homeee
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "/html/home.html"));
-  console.log('Request at ', req.url)
-});
-
-// admin page
-app.get('/admin', (req, res) => {
-  console.log(`Request at ${req.url}`)
-  res.sendFile(path.join(`${__dirname}/html/ProductService.html`))
-})
 
 // logout
 app.post("/logout", function (req, res) {
@@ -177,46 +153,186 @@ app.post("/logout", function (req, res) {
 
 
 
+// Signin page
+app.get("/create", (req, res) => {
+  res.sendFile(path.join(__dirname, "/html/signin.html"));
+  console.log('Request at ', req.url)
+});
+
+// Create account  ------- ค่อยดูว่าจะเก้บใส่ดาต้าเบสไหม
+app.post("/create-acc", function (req, res) {
+  const firstname = req.body.firstname;
+
+  console.log(`Request at ${req.url}`)
+  console.log(`${firstname} create account sucessful`);
+
+});
+
+//homeee
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "/html/home.html"));
+  console.log('Request at ', req.url)
+});
+
+// admin page
+app.get('/admin', (req, res) => {
+  console.log(`Request at ${req.url}`)
+  res.sendFile(path.join(`${__dirname}/html/ProductService.html`))
+})
+
+
+
 // -----------SEARCH----------------
 app.get("/search", (req, res) => {
-  const { keyword, model, color, collection } = req.query;
-  const priceMin = req.query["price-min"];
-  const priceMax = req.query["price-max"];
+  res.sendFile(path.join(__dirname, "/html/SearchPage.html"));
+  console.log('Request at ', req.url)
+});
 
-  let sql = "SELECT * FROM Product WHERE 1=1";
-  let params = [];
+app.get('/search-api', (req, res) => {
+  const {
+    keyword,
+    model,
+    color,
+    collection,
+    'price-min': priceMin,
+    'price-max': priceMax
+  } = req.query;
+
+  let sql = 'SELECT * FROM Product WHERE 1=1';
+  const params = [];
 
   if (keyword) {
-    sql += " AND Product_name LIKE ?";
+    sql += ' AND Product_Name LIKE ?';
     params.push(`%${keyword}%`);
   }
+
   if (model) {
-    sql += " AND Iphone_model = ?";
-    params.push(model);
-  }
-  if (color) {
-    sql += " AND color = ?";
-    params.push(color);
-  }
-  if (collection) {
-    sql += " AND collection = ?";
-    params.push(collection);
-  }
-  if (priceMin && priceMax) {
-    sql += " AND price BETWEEN ? AND ?";
-    params.push(priceMin, priceMax);
+    sql += ' AND Iphone_Model LIKE ?';
+    params.push(`%${model}%`);
   }
 
-  connection.query(sql, params, (error, results) => {
-    if (error) {
-      console.error("Search error:", error);
-      return res.status(500).send("Server error");
+  if (color) {
+    sql += ' AND Color LIKE ?';
+    params.push(`%${color}%`);
+  }
+
+  if (collection) {
+    sql += ' AND Collection LIKE ?';
+    params.push(`%${collection}%`);
+  }
+
+  if (priceMin && priceMax) {
+    sql += ' AND Price BETWEEN ? AND ?';
+    params.push(Number(priceMin), Number(priceMax));
+  } else if (priceMin) {
+    sql += ' AND Price >= ?';
+    params.push(Number(priceMin));
+  } else if (priceMax) {
+    sql += ' AND Price <= ?';
+    params.push(Number(priceMax));
+  }
+
+  console.log('[SQL]', sql);
+  console.log('[PARAMS]', params);
+
+  connection.query(sql, params, (err, results) => {
+    if (err) {
+      console.error('Search query failed:', err);
+      return res.status(500).json({ error: 'Query failed' });
     }
-    res.json(results);  // Send the results to the front-end
+
+    const mimeType = 'image/jpeg'; // หรือเปลี่ยนเป็น image/png ถ้ารูปเป็น .png
+    const seenNames = new Set();
+
+    const processedResults = results
+      .map(product => {
+        if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
+          product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
+        }
+        return product;
+      })
+      .filter(product => {
+        if (seenNames.has(product.Product_Name)) {
+          return false; // ซ้ำ ข้าม
+        }
+        seenNames.add(product.Product_Name);
+        return true; // ยังไม่เคยเจอ เก็บไว้
+      });
+
+    res.json(processedResults);
   });
 });
 
 
+//-----------Detail------------
+app.get("/api/product/:id", (req, res) => {
+  const productId = req.params.id;
+  const sql = "SELECT * FROM Product WHERE Product_ID = ?";
+  
+  connection.query(sql, [productId], (err, results) => {
+    if (err) {
+      console.error("Query error:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const mimeType = 'image/jpeg';
+    const product = results[0];
+    if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
+      product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
+    }
+
+    res.json(product);
+  });
+});
+
+//------------add product--------
+// ตั้งค่าที่เก็บรูป
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/'); // สร้างโฟลเดอร์นี้ไว้ด้วย
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // ตั้งชื่อรูปให้ไม่ซ้ำ
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// เพิ่มสินค้า
+app.post('/add-product', upload.single('product_image'), (req, res) => {
+  const {
+    product_id,
+    product_name,
+    description,
+    color,
+    price,
+    stock,
+    collection,
+    iphone_model
+  } = req.body;
+
+  const imagePath = req.file ? '/uploads/' + req.file.filename : null;
+
+  const sql = `INSERT INTO Product 
+    (Product_ID, Product_Name, Description, Color, Price, Stock_Quantity, Collection, Iphone_Model, Product_Img)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+  connection.query(
+    sql,
+    [product_id, product_name, description, color, price, stock, collection, iphone_model, imagePath],
+    (err, result) => {
+      if (err) {
+        console.error('Error inserting product:', err);
+        return res.status(500).send('Error inserting product');
+      }
+      res.redirect('/admin'); // กลับไปหน้าแอดมิน
+    }
+  );
+});
 
 // 404 handler
 app.use((req, res) => {
