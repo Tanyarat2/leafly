@@ -23,9 +23,9 @@ package.json
 {
   "name": "samote-express",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "Samote Group4 Sec3",
   "license": "ISC",
@@ -39,6 +39,7 @@ package.json
     "nodemon": "^3.1.9"
   }
 }
+
 
 
 แยกไฟล์ html
