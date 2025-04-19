@@ -79,34 +79,25 @@
                         <!-- Price-range -->
                         <label>Price-range</label>
                         <div class="price-range">
-                            <input type="number" min="0" placeholder="0">
+                            <input type="number" min="0" placeholder="0" name="price-min">
                             <span>⎯</span>
-                            <input type="number" min="0" placeholder="99999">
+                            <input type="number" min="0" placeholder="99999" name="price-max">
                         </div>
                     </div>
                 </div>
 
                 <!-- Search Button -->
                 <div class="search-button-wrapper">
-                    <button type="submit" class="search_button">Search</button>
+                    <button type="submit" class="search_button" onclick="searchProduct()">Search</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Displayed products section -->
-    <div class="product-container">
-        <div class="product">
-            <img src="cat.jpg" alt="Magenta Cat">
-            <p class="product-name">Magenta Cat</p>
-            <p class="product-price">฿2,000</p>
-        </div>
-        <div class="product">
-            <img src="golden.jpg" alt="Pink Golden">
-            <p class="product-name">Pink Golden</p>
-            <p class="product-price">฿1,000</p>
-        </div>
-    </div>
+    <div class="product-container" id="resultsContainer"></div>
+
+   
 
     <!-- Footer section -->
     <div class="footer">
@@ -131,7 +122,9 @@
 
         </div>
     </div>
-
+    <script src="search.js"></script>
 </body>
 
 </html>
+
+
