@@ -43,16 +43,22 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/html/login.html"));
   console.log('Request at ', req.url)
 });
-app.post("/login", function (req, res) {
+
+app.post("/admin-login", function (req, res) {
   const loginTime = new Date().toISOString().slice(0, 19).replace("T", " ");
   const { admin_id, password } = req.body;
+
+  if (!admin_id) {
+    console.log("No admin_id in session.");
+    return res.redirect('/'); // 
+  }
 
   // ดึงข้อมูลชื่อแอดมินจาก Admin_info
   const adminInfoSql = `SELECT * FROM Admin_info WHERE admin_id = ?`;
   connection.query(adminInfoSql, [admin_id], (err, adminResults) => {
     if (err) {
       console.error("Error fetching admin info:", err);
-      res.redirect('/home');
+      res.redirect('/');
       return;
     }
 
@@ -65,7 +71,8 @@ app.post("/login", function (req, res) {
       connection.query(sql, [admin_id, password], (error, results) => {
         if (results.length > 0) {
           req.session.admin_id = admin_id; // collect admin_id to session
-
+          //res.json({ success: true, message: 'Login successful' });
+          
           // insert into login table
           const loginsql = `
             INSERT INTO Admin_login (admin_id, Password, Login_Time)
@@ -82,12 +89,12 @@ app.post("/login", function (req, res) {
           res.redirect('/admin');
         } else {
           console.log("Invalid username or password");
-          res.redirect('/home');
+          res.redirect('/');
         }
       });
     } else {
       console.log("Admin ID not found");
-      res.redirect('/home');
+      res.redirect('/');
     }
   });
 });
@@ -137,7 +144,7 @@ app.post("/logout", function (req, res) {
   connection.query(getAdminNameSql, [admin_id], (error, results) => {
     if (error) {
       console.error("Error fetching admin name:", error);
-      return res.redirect('/home'); // ป้องกันการผิดพลาด
+      return res.redirect('/home'); 
     }
 
     const adminName = results.length > 0 ? `${results[0].First_Name} ${results[0].Last_Name}` : 'Unknown Admin';
@@ -218,5 +225,5 @@ app.use((req, res) => {
 
 // Start server
 app.listen(process.env.PORT, () => {
-  console.log("Server listening at Port " + process.env.PORT);
+  console.log("Backend Server listening at Port " + process.env.PORT);
 });
