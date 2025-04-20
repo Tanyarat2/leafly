@@ -1,298 +1,89 @@
-const express = require("express");
-const path = require("path");
-const dotenv = require("dotenv");
-const mysql = require("mysql2");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leafly - Eco Phone Cases</title>
+    <link rel="stylesheet" href="DetailandProductService.css">
+</head>
+<body>
 
-const app = express();
-dotenv.config();
-
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "html")));
-app.use(express.static('public'));
-
-const session = require('express-session');
-
-app.use(session({
-  secret: 'myAdmin',
-  resave: false,
-  saveUninitialized: true
-}));
-
-// -------Connect DB------------
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
-connection.connect((err) => {
-  if (err) {
-    console.error("Database connection failed:", err);
-    return;
-  }
-  console.log("Connected to DB:", process.env.DB_NAME);
-});
-
-// --------------------------------
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="home.html"><img src="home.png" alt="Menu"></a>
+        <span class="search-icon-PS"><a href="SearchPage.html"><img src="search.png"></a></span>
+    </div>
 
 
+    <div class = "product-page-detail">
+        <div>
+            <img class = "product-image-detail product-detail" src="rabbit.jpg" alt="Yellow Bunny Phone Case" >
+        </div>
 
-// login page
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/html/login.html"));
-  console.log('Request at ', req.url)
-});
+        <div class = "center-detail">
+        <div class = "product-details-detail">
+            <h2 class = "product-title-detail"><strong>Yellow Bunny</strong></h2>
+            <h3><strong>Description</strong></h3>
+            <p>Ding Dong stays with Dock Dack.<br> Pock Pack stays with Pong Pang.</p>
+            <p><strong>Price:</strong> ฿1,100</p>
+            
+            <p><label for="iphone">iPhone:</label>
+            <select class = "product-select-detail" id="iphone">
+                <option value="">iPhone...</option>
+                <option value="iphone14">iPhone 14</option>
+                <option value="iphone15">iPhone 15</option>
+                <option value="iphone16">iPhone 16</option>
+            </select></p>
+            <button class="add-to-cart-detail">Add to cart</button>
+        </div>
+        </div>
+    </div>
 
-app.post("/admin-login", function (req, res) {
-  const loginTime = new Date().toISOString().slice(0, 19).replace("T", " ");
-  const { admin_id, password } = req.body;
+    <div class="footer">
+        <div class="footer-column">
+            <h3><a href="team.html">Samote</a></h3>
+            <h4>About us:</h4>
+            <p>Samote is a passionate group of university students on a mission to make the world a better place—one innovative idea at a time!</p>
+        </div>
+        <div class="footer-column">
+            <h3>Leafly</h3>
+            <h4>What is Leafly:</h4>
+            <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.</p>
+        </div>
+        <div class="footer-column">
+            <div class="last-footer">
+                <h1>Leafly <br> by <br> Samote</h3>
+                <h5><a href="login.html"><br>for Administrator</a></h5>
+            </div>
+            
+        </div>
+    </div>
 
-  if (!admin_id) {
-    console.log("No admin_id in session.");
-    return res.redirect('/'); // 
-  }
+</body>
 
-  // ดึงข้อมูลชื่อแอดมินจาก Admin_info
-  const adminInfoSql = `SELECT * FROM Admin_info WHERE admin_id = ?`;
-  connection.query(adminInfoSql, [admin_id], (err, adminResults) => {
-    if (err) {
-      console.error("Error fetching admin info:", err);
-      res.redirect('/');
+<script>
+  window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get("id");
+
+    if (!productId) {
+      alert("Product not found");
       return;
     }
 
-    if (adminResults.length > 0) {
-      const adminName = `${adminResults[0].First_Name} ${adminResults[0].Last_Name}`;
-      console.log(`Request at ${req.url}`);
-
-      // ตรวจสอบข้อมูลการล็อกอิน
-      const sql = `SELECT * FROM Admin_login WHERE admin_id = ? AND Password = ?`;
-      connection.query(sql, [admin_id, password], (error, results) => {
-        if (results.length > 0) {
-          req.session.admin_id = admin_id; // collect admin_id to session
-          //res.json({ success: true, message: 'Login successful' });
-          
-          // insert into login table
-          const loginsql = `
-            INSERT INTO Admin_login (admin_id, Password, Login_Time)
-            VALUES (?, ?, ?)
-          `;
-          connection.query(loginsql, [admin_id, password, loginTime], (err) => {
-            if (err) {
-              console.error("Insert login failed:", err);
-            } else {
-              console.log(`[LOGIN] by Admin: ${adminName} at ${loginTime}`);
-            }
-          });
-
-          res.redirect('/admin');
-        } else {
-          console.log("Invalid username or password");
-          res.redirect('/');
-        }
-      });
-    } else {
-      console.log("Admin ID not found");
-      res.redirect('/');
-    }
-  });
-});
-
-
-// Signin page
-app.get("/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "/html/signin.html"));
-  console.log('Request at ', req.url)
-});
-
-// Create account  ------- ค่อยดูว่าจะเก้บใส่ดาต้าเบสไหม
-app.post("/create-acc", function (req, res) {
-  const firstname = req.body.firstname;
-
-  console.log(`Request at ${req.url}`)
-  console.log(`${firstname} create account sucessful`);
-
-});
-
-//homeee
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "/html/home.html"));
-  console.log('Request at ', req.url)
-});
-
-// admin page
-app.get('/admin', (req, res) => {
-  console.log(`Request at ${req.url}`)
-  res.sendFile(path.join(`${__dirname}/html/ProductService.html`))
-})
-
-// logout
-app.post("/logout", function (req, res) {
-  const logoutTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-  const admin_id = req.session.admin_id;
-
-  if (!admin_id) {
-    console.log("No admin_id in session.");
-    return res.redirect('/home'); // หรือหน้าที่คุณต้องการให้ไปหากไม่มี admin_id
-  }
-
-  console.log(`Request at ${req.url}`);
-
-  // ดึงชื่อของ admin จากฐานข้อมูล
-  const getAdminNameSql = `SELECT First_Name, Last_Name FROM Admin_info WHERE admin_id = ?`;
-  connection.query(getAdminNameSql, [admin_id], (error, results) => {
-    if (error) {
-      console.error("Error fetching admin name:", error);
-      return res.redirect('/home'); 
-    }
-
-    const adminName = results.length > 0 ? `${results[0].First_Name} ${results[0].Last_Name}` : 'Unknown Admin';
-
-    console.log(`[LOGOUT] by Admin: ${adminName} at ${logoutTime}`);
-
-    // Update logout time
-    const updateLogSql = `
-      UPDATE Admin_login
-      SET logout_time = ?
-      WHERE admin_id = ?
-      ORDER BY login_time DESC
-      LIMIT 1
-    `;
-  
-    connection.query(updateLogSql, [logoutTime, admin_id], (error, results) => {
-      if (error) {
-        console.error("Logout log update failed:", error);
-      } else {
-        console.log("Logout time updated successfully.");
-      }
-
-      // Destroy the session after the update is successful
-      req.session.destroy(() => {
-        res.redirect('/'); // Redirect to home or login page after logout
-      });
-    });
-  });
-});
-
-
-
-// -----------SEARCH----------------
-app.get("/search", (req, res) => {
-  res.sendFile(path.join(__dirname, "/html/SearchPage.html"));
-  console.log('Request at ', req.url)
-});
-
-app.get('/search-api', (req, res) => {
-  const {
-    keyword,
-    model,
-    color,
-    collection,
-    'price-min': priceMin,
-    'price-max': priceMax
-  } = req.query;
-
-  let sql = 'SELECT * FROM Product WHERE 1=1';
-  const params = [];
-
-  if (keyword) {
-    sql += ' AND Product_Name LIKE ?';
-    params.push(`%${keyword}%`);
-  }
-
-  if (model) {
-    sql += ' AND Iphone_Model LIKE ?';
-    params.push(`%${model}%`);
-  }
-
-  if (color) {
-    sql += ' AND Color LIKE ?';
-    params.push(`%${color}%`);
-  }
-
-  if (collection) {
-    sql += ' AND Collection LIKE ?';
-    params.push(`%${collection}%`);
-  }
-
-  if (priceMin && priceMax) {
-    sql += ' AND Price BETWEEN ? AND ?';
-    params.push(Number(priceMin), Number(priceMax));
-  } else if (priceMin) {
-    sql += ' AND Price >= ?';
-    params.push(Number(priceMin));
-  } else if (priceMax) {
-    sql += ' AND Price <= ?';
-    params.push(Number(priceMax));
-  }
-
-  console.log('[SQL]', sql);
-  console.log('[PARAMS]', params);
-
-  connection.query(sql, params, (err, results) => {
-    if (err) {
-      console.error('Search query failed:', err);
-      return res.status(500).json({ error: 'Query failed' });
-    }
-
-    const mimeType = 'image/jpeg'; // หรือเปลี่ยนเป็น image/png ถ้ารูปเป็น .png
-    const seenNames = new Set();
-
-    const processedResults = results
-      .map(product => {
-        if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
-          product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
-        }
-        return product;
+    fetch(`/api/product/${productId}`)
+      .then(res => res.json())
+      .then(product => {
+        document.querySelector(".product-image-detail").src = product.Product_Img;
+        document.querySelector(".product-title-detail").innerText = product.Product_Name;
+        document.querySelector(".product-details-detail p:nth-of-type(1)").innerHTML = product.Description || "No description.";
+        document.querySelector(".product-details-detail p:nth-of-type(2)").innerHTML = `<strong>Price:</strong> ฿${product.Price}`;
       })
-      .filter(product => {
-        if (seenNames.has(product.Product_Name)) {
-          return false; // ซ้ำ ข้าม
-        }
-        seenNames.add(product.Product_Name);
-        return true; // ยังไม่เคยเจอ เก็บไว้
+      .catch(err => {
+        console.error("Error loading product:", err);
+        alert("Error loading product details.");
       });
+  };
+</script>
 
-    res.json(processedResults);
-  });
-});
-
-
-//-----------Detail------------
-app.get("/api/product/:id", (req, res) => {
-  const productId = req.params.id;
-  const sql = "SELECT * FROM Product WHERE Product_ID = ?";
-  
-  connection.query(sql, [productId], (err, results) => {
-    if (err) {
-      console.error("Query error:", err);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-
-    if (results.length === 0) {
-      return res.status(404).json({ error: "Product not found" });
-    }
-
-    const mimeType = 'image/jpeg';
-    const product = results[0];
-    if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
-      product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
-    }
-
-    res.json(product);
-  });
-});
-
-
-
-// 404 handler
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "/html/error.html"));
-});
-
-// Start server
-app.listen(process.env.PORT, () => {
-  console.log("Backend Server listening at Port " + process.env.PORT);
-});
+</html>
