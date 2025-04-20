@@ -3,9 +3,12 @@ const path = require("path");
 const dotenv = require("dotenv");
 const mysql = require("mysql2");
 const multer = require('multer');
+const fs = require('fs');
+
 
 const app = express();
 dotenv.config();
+
 
 // Middleware
 app.use(express.json());
@@ -41,8 +44,14 @@ connection.connect((err) => {
 
 
 
-// --------login page-----------
+
 app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/html/home.html"));
+  console.log('Request at ', req.url)
+});
+
+// --------login page-----------
+app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "/html/login.html"));
   console.log('Request at ', req.url)
 });
@@ -54,7 +63,7 @@ app.post("/admin-login", function (req, res) {
 
   if (!admin_id) {
     console.log("No admin_id in session.");
-    return res.redirect('/'); // 
+    return res.redirect('/login'); // 
   }
 
   //Get first name and last name from Admin_info table where that admin_id that login
@@ -62,7 +71,7 @@ app.post("/admin-login", function (req, res) {
   connection.query(adminInfoSql, [admin_id], (err, adminResults) => {
     if (err) {
       console.error("Error fetching admin info:", err);
-      res.redirect('/');
+      res.redirect('/login');
       return;
     }
 
@@ -92,13 +101,13 @@ app.post("/admin-login", function (req, res) {
 
           res.redirect('/admin');
         } else {
-          console.log("Invalid username or password");
-          res.redirect('/');
+          console.log("Invalid Admin ID or Password");
+          res.redirect('/login');
         }
       });
     } else {
       console.log("Admin ID not found");
-      res.redirect('/');
+      res.redirect('/login');
     }
   });
 });
@@ -110,17 +119,17 @@ app.post("/logout", function (req, res) {
 
   if (!admin_id) {
     console.log("No admin_id in session.");
-    return res.redirect('/home'); // หรือหน้าที่คุณต้องการให้ไปหากไม่มี admin_id
+    return res.redirect('/');
   }
 
   console.log(`Request at ${req.url}`);
 
-  // ดึงชื่อของ admin จากฐานข้อมูล
+  // Get first name and last name from admin_info table where admin_id that use to login
   const getAdminNameSql = `SELECT First_Name, Last_Name FROM Admin_info WHERE admin_id = ?`;
   connection.query(getAdminNameSql, [admin_id], (error, results) => {
     if (error) {
       console.error("Error fetching admin name:", error);
-      return res.redirect('/home'); 
+      return res.redirect('/'); 
     }
 
     const adminName = results.length > 0 ? `${results[0].First_Name} ${results[0].Last_Name}` : 'Unknown Admin';
@@ -145,7 +154,7 @@ app.post("/logout", function (req, res) {
 
       // Destroy the session after the update is successful
       req.session.destroy(() => {
-        res.redirect('/'); // Redirect to home or login page after logout
+        res.redirect('/login'); // Redirect to home or login page after logout
       });
     });
   });
@@ -188,7 +197,7 @@ app.get("/search", (req, res) => {
   console.log('Request at ', req.url)
 });
 
-app.get('/search-api', (req, res) => {
+app.get('/search-api', async (req, res) => {
   const {
     keyword,
     model,
@@ -303,7 +312,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // เพิ่มสินค้า
-app.post('/add-product', upload.single('product_image'), (req, res) => {
+app.post('/add-product', upload.single('product_image'), async (req, res) => {
   const {
     product_id,
     product_name,
@@ -315,26 +324,40 @@ app.post('/add-product', upload.single('product_image'), (req, res) => {
     iphone_model
   } = req.body;
 
-  const imagePath = req.file ? '/uploads/' + req.file.filename : null;
+  let base64Image = null;
 
-  const sql = `INSERT INTO Product 
+  if (req.file) {
+    const imagePath = path.join(__dirname, 'public/uploads', req.file.filename);
+    try {
+      const imageBuffer = fs.readFileSync(imagePath);
+      const mimeType = req.file.mimetype; 
+      base64Image = `data:${mimeType};base64,${imageBuffer.toString('base64')}`; // ✅ add prefix
+    } catch (err) {
+      console.error('Error reading image:', err);
+      return res.status(500).send('Error reading uploaded image');
+    }
+  }
+
+  const sql = `
+    INSERT INTO Product 
     (Product_ID, Product_Name, Description, Color, Price, Stock_Quantity, Collection, Iphone_Model, Product_Img)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
 
   connection.query(
     sql,
-    [product_id, product_name, description, color, price, stock, collection, iphone_model, imagePath],
+    [product_id, product_name, description, color, price, stock, collection, iphone_model, base64Image],
     (err, result) => {
       if (err) {
         console.error('Error inserting product:', err);
         return res.status(500).send('Error inserting product');
       }
-      res.redirect('/admin'); // กลับไปหน้าแอดมิน
+      console.log(`Add new product : [${product_id}] ${product_name}, iPhone model: ${iphone_model}, Collection: ${collection}, Color: ${color}`);
+      res.redirect('/admin');
     }
   );
 });
 
-// 404 handler
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "/html/error.html"));
 });
