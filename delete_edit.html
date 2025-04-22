@@ -9,7 +9,7 @@
   <div class="navbar-PS">
     <a href="ProductService.html"><img src="home.png" alt="Menu"></a>
     <div class="nav-icons-PS">
-      <span class="search-icon-PS"><a href="SearchPage.html"><img src="search.png"></a></span>
+      <!--span class="search-icon-PS"><a href="SearchPage.html"><img src="search.png"></a></span-->
       <img class="user-icon-PS" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User">
     </div>
 </div>
@@ -18,6 +18,9 @@
   <div class="main">
     <h2>Edit / Delete Product</h2>
     <div class="product-section">
+
+
+      
       
       <!-- Image Box -->
       <div class="img_upload">
@@ -27,14 +30,18 @@
         <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)" />
       </div>
 
+
       <!-- Form -->
       <div class="fcard">
+         <!-- Search Product ID to edit/delete -->
+        <form method="GET" action="/edit-product-search" class="search-inline">
+          <label for="product_id">Product_ID:</label>
+          <input type="text" name="product_id" placeholder="Format : xxxxxxxxxx" required>
+          <button type="submit" class="Search-btn">Search</button>
+        </form>
+
         <form action="/edit-product/{{id}}" method="POST" enctype="multipart/form-data">
-        <!-- ID -->
-          <div class="fproduct">
-            <label>Product ID:</label>
-            <div> <span class="product_id">XXXXXXXXX</span></div>
-          </div>
+      
         <!-- Name + description -->
           <div class="fgroup">
             <label>Product Name:</label>
@@ -88,7 +95,9 @@
         
         <!-- button -->
           <div class="btn">
+            <form method="POST" action="/edit-product/:id">
             <button type="submit" class="confirm_btn">Confirm</button>
+            </form>
             <a href="/delete-product/{{id}}" onclick="return confirm('Do you want to delete this product?')" class="delete_btn">Delete</a>
           </div>
         </form>
@@ -109,7 +118,9 @@
     <div class="footer-column">
         <div class="last-footer">
             <h1>Leafly <br> by <br> Samote</h3>
-              <h5><a href="home.html"><br>Logout</a></h5>
+              <form method="POST" action="/logout">
+                <button type="submit" class="logout_btn" >Logout</button>
+            </form>
         </div>
         
     </div>
