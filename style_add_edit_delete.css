@@ -239,19 +239,6 @@ body {
     background: #6e796d;
   }
 
-
-
-
-  .logout_btn:hover {
-    background-color: rgb(207, 207, 207);
-  }
-  
   .logout_btn {
-    background-color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  
-  
+    align-self: center;
+    }
