@@ -2,10 +2,11 @@
 
 
 TODO LIST
-ทุกหน้า comment แบบสวย  ( team.html, home.html, home.js )
+ทุกหน้า comment แบบสวย  ( team.html, home.html, home.js, detail.html )
 ใส่ <> ให้ถูก fotter nav ไรงี้ทำให้ถูกต้่องๆๆ แก้<div class=footer> ไรพวกนี้กะได้ แต่ต้องแก้ในcss ด้วย
 - หน้า team รอจากพลอย
-- หน้า home +ทำตรงgoogle maps สีข้อแความ ชื่อร้าน 
+- หน้า home +ทำตรงgoogle maps สีข้อแความ ชื่อร้าน
+- detail.html แก้ css ไหมอ่ะ ที่เคยบอกว่าหน้ามันขยายไปตาม description
 
 
 
