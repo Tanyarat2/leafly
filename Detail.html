@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leafly - Eco Phone Cases</title>
     <link rel="stylesheet" href="DetailandProductService.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
-    <div class="navbar">
-        <a href="home.html"><img src="home.png" alt="Menu"></a>
-        <span class="search-icon-PS"><a href="SearchPage.html"><img src="search.png"></a></span>
-    </div>
+    <nav>
+        <div class="navbar">
+            <a href="home"><img src="home.png" alt="Menu"></a>
+            <span class="search-icon-PS"><a href="/search"><img src="search.png"></a></span>
+        </div>
+    </nav>
 
 
-    <div class = "product-page-detail">
+    <div class="product-page-detail">
         <div>
-            <img class = "product-image-detail product-detail" src="rabbit.jpg" alt="Yellow Bunny Phone Case" >
+            <img class="product-image-detail product-detail" src="rabbit.jpg" alt="Yellow Bunny Phone Case">
         </div>
 
-        <div class = "center-detail">
-        <div class = "product-details-detail">
-            <h2 class = "product-title-detail"><strong>Yellow Bunny</strong></h2>
-            <h3><strong>Description</strong></h3>
-            <p>Ding Dong stays with Dock Dack.<br> Pock Pack stays with Pong Pang.</p>
-            <p><strong>Price:</strong> ฿1,100</p>
-            
-            <p><label for="iphone">iPhone:</label>
-            <select class = "product-select-detail" id="iphone">
-                <option value="">iPhone...</option>
-                <option value="iphone14">iPhone 14</option>
-                <option value="iphone15">iPhone 15</option>
-                <option value="iphone16">iPhone 16</option>
-            </select></p>
-            <button class="add-to-cart-detail">Add to cart</button>
-        </div>
+        <div class="center-detail">
+            <div class="product-details-detail">
+                <h2 class="product-title-detail"><strong></strong></h2>
+                <h3><strong>Description</strong></h3>
+                <p><br></p>
+                <p><strong>Price:</strong></p>
+
+                <p><label for="iphone">iPhone:</label>
+                    <select class="product-select-detail" id="iphone">
+                        <option value="">iPhone...</option>
+                        <option value="iphone14">iPhone 14</option>
+                        <option value="iphone15">iPhone 15</option>
+                        <option value="iphone16">iPhone 16</option>
+                    </select>
+                </p>
+                <button class="add-to-cart-detail">Add to cart</button>
+            </div>
         </div>
     </div>
-
+<footer>
     <div class="footer">
         <div class="footer-column">
-            <h3><a href="team.html">Samote</a></h3>
+            <h3><a href="/team">Samote</a></h3>
             <h4>About us:</h4>
-            <p>Samote is a passionate group of university students on a mission to make the world a better place—one innovative idea at a time!</p>
+            <p>Samote is a passionate group of university students on a mission to make the world a better place—one
+                innovative idea at a time!</p>
         </div>
         <div class="footer-column">
             <h3>Leafly</h3>
             <h4>What is Leafly:</h4>
-            <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.</p>
+            <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the
+                community.</p>
         </div>
         <div class="footer-column">
             <div class="last-footer">
                 <h1>Leafly <br> by <br> Samote</h3>
-                <h5><a href="login.html"><br>for Administrator</a></h5>
+                    <h5><a href="/admin-page"><br>for Administrator</a></h5>
             </div>
-            
+
         </div>
+    </footer>
     </div>
 
 </body>
 
 <script>
-  window.onload = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get("id");
+    window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get("id");
 
-    if (!productId) {
-      alert("Product not found");
-      return;
-    }
+        if (!productId) {
+            alert("Product not found");
+            return;
+        }
 
-    fetch(`/api/product/${productId}`)
-      .then(res => res.json())
-      .then(product => {
-        document.querySelector(".product-image-detail").src = product.Product_Img;
-        document.querySelector(".product-title-detail").innerText = product.Product_Name;
-        document.querySelector(".product-details-detail p:nth-of-type(1)").innerHTML = product.Description || "No description.";
-        document.querySelector(".product-details-detail p:nth-of-type(2)").innerHTML = `<strong>Price:</strong> ฿${product.Price}`;
-      })
-      .catch(err => {
-        console.error("Error loading product:", err);
-        alert("Error loading product details.");
-      });
-  };
+        fetch(`http://localhost:4000/api/product/${productId}`)
+        .then(res => res.json())
+            .then(product => {
+                document.querySelector(".product-image-detail").src = product.Product_Img;
+                document.querySelector(".product-title-detail").innerText = product.Product_Name;
+                document.querySelector(".product-details-detail p:nth-of-type(1)").innerHTML = product.Description || "No description.";
+                document.querySelector(".product-details-detail p:nth-of-type(2)").innerHTML = `<strong>Price:</strong> ฿${product.Price}`;
+            })
+            .catch(err => {
+                console.error("Error loading product:", err);
+                alert("Error loading product details.");
+            });
+    };
 </script>
 
 </html>
