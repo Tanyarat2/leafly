@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Edit/Delete Product</title>
+  <link rel="stylesheet" href="/style_add_edit_delete.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-PS">
+      <a href="/admin-page"><img src="/home.png" alt="Menu"></a>
+      <div class="nav-icons-PS">
+        <img class="user-icon-PS" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User">
+      </div>
+    </div>
+  </nav>
+
+  <div class="main">
+    <h2>Edit / Delete Product</h2>
+    <div class="product-section">
+      <!-- Image Preview -->
+      <div class="img_upload">
+        <img id="preview" src="default.png" alt="Current Image" />
+      </div>
+
+      <!-- Search Form -->
+      <div class="search-inline">
+        <form id="search-form">
+          <label for="product_id">Product ID:</label>
+          <input type="text" id="product_id" name="product_id" placeholder="Enter Product ID" required>
+          <button type="submit" class="Search-btn">Search</button>
+        </form>
+      </div>
+
+      <!-- Edit/Delete Form -->
+      <div id="edit-form-container" class="fcard" style="display:none;">
+        <form id="edit-form" enctype="multipart/form-data">
+          <input type="hidden" name="product_id" id="edit-product_id">
+
+          <!-- รูป -->
+          <div class="fgroup">
+            <label>Current Image:</label>
+            <img id="preview" src="default.png" alt="Current Image" />
+          </div>
+          <div class="fgroup">
+            <label>Change Image:</label>
+            <input type="hidden" name="current_image" id="edit-current_image">
+            <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)">
+          </div>
+
+
+
+          <div class="fgroup">
+            <label>Product Name:</label>
+            <input type="text" name="product_name" id="edit-product_name">
+          </div>
+
+          <div class="fgroup">
+            <label>Description:</label>
+            <textarea name="description" id="edit-description"></textarea>
+          </div>
+
+          <div class="frow">
+            <div class="fgroup half">
+              <label>Price:</label>
+              <input type="number" name="price" id="edit-price">
+            </div>
+            <div class="fgroup half">
+              <label>Color:</label>
+              <input type="text" name="color" id="edit-color">
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <label>Collection:</label>
+            <input type="text" name="collection" id="edit-collection">
+          </div>
+
+          <div class="fgroup">
+            <label>iPhone Model:</label>
+            <input type="text" name="iphone_model" id="edit-iphone_model">
+          </div>
+
+          <div class="stock">
+            <label>Stock:</label>
+            <input type="number" name="stock" id="edit-stock">
+          </div>
+
+          <div class="fgroup">
+            <label>Change Image:</label>
+            <input type="hidden" name="current_image" id="edit-current_image">
+            <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)">
+          </div>
+
+          <div class="btn">
+            <button type="button" id="update-btn" class="confirm_btn">Confirm</button>
+            <button type="button" id="delete-btn" class="delete_btn">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-column">
+      <h3><a href="/team">Samote</a></h3>
+      <h4>About us:</h4>
+      <p>Samote is a passionate group of university students on a mission to make the world a better place—one
+        innovative idea at a time!</p>
+    </div>
+    <div class="footer-column">
+      <h3>Leafly</h3>
+      <h4>What is Leafly:</h4>
+      <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.</p>
+    </div>
+    <div class="footer-column">
+      <div class="last-footer">
+        <h1>Leafly <br> by <br> Samote</h1>
+        <form method="POST" action="/logout">
+          <button type="submit" class="logout_btn" id="logoutBtn">Logout</button>
+        </form>
+      </div>
+    </div>
+  </footer>
+  <script src="delete_edit.js"> </script>
+</body>
+
+</html>
