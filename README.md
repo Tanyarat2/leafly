@@ -1,4 +1,20 @@
 # leafly
+
+
+TODO LIST
+ทุกหน้า comment แบบสวย  ( team.html, home.html, home.js )
+ใส่ <> ให้ถูก fotter nav ไรงี้ทำให้ถูกต้่องๆๆ แก้<div class=footer> ไรพวกนี้กะได้ แต่ต้องแก้ในcss ด้วย
+- หน้า team รอจากพลอย
+- หน้า home +ทำตรงgoogle maps สีข้อแความ ชื่อร้าน 
+
+
+
+
+
+
+
+
+อย่าเพิ่ง
 http://localhost:4000/
 
 
