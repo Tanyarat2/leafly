@@ -1,0 +1,173 @@
+/* General Styles */
+body {
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F0;
+    color: #ffffff;
+    /* font-family: Inter; */
+}
+
+.header img {
+    width: 230px;
+    /* Set the width */
+    height: 100px;
+    /* Set the height */
+    background-color: #685752;
+    object-fit: contain;
+    /* Ensures the image fills the area properly*/
+    border-radius: 10px;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #685752;
+    padding: 15px 20px;
+}
+
+.navbar img {
+    width: 30px;
+}
+
+.search-icon {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+
+}
+
+.search-icon a {
+    text-decoration: none;
+
+}
+
+.search-icon img {
+    width: 25px;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    background: #685752;
+    color: #C5D1B2;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.tagline {
+    font-style: italic;
+    color: #685752;
+    font-weight: bold;
+}
+
+
+/* Product Section */
+.product-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+}
+
+.product {
+    color: #ffffff;
+    background-color: #879283;
+    padding: 15px;
+    text-align: center;
+    width: 180px;
+    border-radius: 10px;
+}
+
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+    width: 170px;
+    /* Set the width */
+    height: 200px;
+    /* Set the height */
+    object-fit: cover;
+}
+
+.product-name {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+a.product{
+   text-decoration: none;
+}
+
+.product-price {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #685752;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+
+}
+
+.last-footer {
+    text-align: center;
+}
+
+/* Ensure each column has equal width */
+.footer-column {
+    flex: 1;
+    padding: 0 20px;
+}
+
+/* Style links */
+.footer a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+/* for team page */
+.teamname {
+    text-align: center;
+    color: #685752;
+    font-weight: bold;
+    font-size: large;
+}
+
+.teampic-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 20px;
+}
+
+.teampic {
+    background-color: #685752;
+    padding: 15px;
+    text-align: center;
+    width: 120px;
+    /* border-radius: 10px; */
+}
+
+.teampic img {
+    width: 120px;
+    object-fit: cover;
+}
