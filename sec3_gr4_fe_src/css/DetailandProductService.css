@@ -8,7 +8,7 @@ body {
 }
 
 /* Navigation Bar */
-.navbar, .navbar-PS {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,37 +16,24 @@ body {
     padding: 15px 20px;
 }
 
-.navbar img, .navbar-PS img {
+nav img {
     width: 30px;
-    cursor: pointer;
 }
 
-.nav-icons-PS {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.search-icon, .search-icon-PS {
+.search-icon {
     font-size: 20px;
     color: white;
     cursor: pointer;
+
 }
 
-.search-icon-PS a, .button-container-PS a, .add-product-card-PS a {
+.search-icon a {
     text-decoration: none;
-    color: white;
+
 }
 
 .search-icon img {
     width: 25px;
-}
-
-.user-icon-PS {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 /* Header Section */
@@ -235,7 +222,13 @@ body {
     text-align: center;
   }
   
+  .footer-column h3 a {
+    color: inherit; /* Makes "Samote" the same color as the surrounding text */
+    font-style: italic;
+}
+
 /* Product Service Page */
+
 
 /* Footer Section */
 footer {
@@ -246,6 +239,11 @@ footer {
     display: flex;
     justify-content: space-between;
     text-align: left;
+
+}
+
+.last-footer {
+    text-align: center;
 }
 
 .footer-column {
@@ -253,28 +251,11 @@ footer {
     padding: 0 20px;
 }
 
-.footer a {
-    color: white;
-    text-decoration: underline;
+
+footer a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
     font-style: italic;
+    text-decoration: underline;
 }
 
-.last-footer {
-    text-align: center;
-}
-
-
-.main-content {
-    flex: 1;
-    padding-bottom: 20px;  /*make it space from  footer*/
-}
-
-.footer {
-    background-color: #685752;
-    color: white;
-    padding: 20px;
-    margin-top: auto; /* ตัวนี้ดัน footer ลง */
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
-}
