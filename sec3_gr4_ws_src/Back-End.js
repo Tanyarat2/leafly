@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 // Middleware
 app.use(cors({
   origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
@@ -84,13 +84,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60,
+    maxAge: 1000 * 60 * 60 * 3,
     httpOnly: true,
     secure: false
   }
 }));
-
-
 
 
 app.use("/", router);
@@ -387,7 +385,6 @@ router.post('/admin-logout', function (req, res) {
   });
 });
 
-// ---------------ADD PRODUCT PAGE---------------
 // --------------- ADD PRODUCT ---------------
 router.post('/add-product', async (req, res) => {
   const {
@@ -455,38 +452,67 @@ router.post('/add-product', async (req, res) => {
 
 // ---------------EDIT---------------
 // serach by product id
-router.get('/edit-product-search/:product_id', async (req, res) => {
-  const { product_id } = req.params;  // แก้ไขตรงนี้
-  try {
-      const result = await connection.query('SELECT * FROM product WHERE Product_ID = ?', [product_id]);
-      if (result.length === 0) {
-          return res.status(404).json({ message: 'Product not found.' });
-      }
-      res.json(result[0]); // ส่งข้อมูลสินค้ากลับไป
-  } catch (error) {
-      res.status(500).json({ message: 'Server error' });
+// Route to search for a product by ID
+router.get("/edit-product-search", (req, res) => {
+  console.log('Request at ', req.url);
+  const { product_id } = req.query;
+
+  // เช็คว่า product_id ถูกส่งมาหรือไม่
+  if (!product_id) {
+    return res.status(400).json({ error: "Product ID is required" });
   }
+
+  const query = `SELECT * FROM Product WHERE Product_ID = ?`;
+  connection.query(query, [product_id], (err, results) => {
+    if (err) {
+      console.error("Search error:", err);
+      return res.status(500).json({ success: false, message: "Database error", details: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    // ส่งข้อมูลสินค้าคืนไปยัง client
+    res.json(results[0]);
+  });
 });
 
-// Route สำหรับการแก้ไขข้อมูลสินค้า
-router.put('/edit-product', async (req, res) => {
-  const { product_id, product_name, description, price, color, collection, iphone_model, stock, product_image_base64 } = req.body;
+// Edit product route
+router.put('/edit-product', isAdminLoggedIn, async (req, res) => {
+  console.log('Received edit-product request:', req.body);
 
-  let imageData = null;
-  if (product_image_base64) {
+  const {
+    product_id,
+    product_name,
+    description,
+    price,
+    color,
+    collection,
+    iphone_model,
+    stock,
+    product_image_base64
+  } = req.body;
+
+  if (!product_id) {
+    return res.status(400).json({ success: false, message: 'Product ID is required' });
+  }
+
+  let imageData = product_image_base64 || null;
+  if (imageData) {
     const regex = /^data:image\/(jpeg|jpg|png|gif);base64,/;
-    if (regex.test(product_image_base64)) {
-      imageData = product_image_base64;
-    } else {
+    if (!regex.test(imageData)) {
       return res.status(400).json({ success: false, message: 'Invalid image format' });
     }
   }
 
   const sql = `
-    UPDATE product
+    UPDATE Product
     SET Product_Name = ?, Description = ?, Price = ?, Color = ?, Collection = ?, Iphone_Model = ?, Stock_Quantity = ?, Product_Img = ?
     WHERE Product_ID = ?
   `;
+
+  console.log('Executing SQL:', sql, 'Params:', [product_name, description, price, color, collection, iphone_model, stock, imageData, product_id]);
 
   connection.query(
     sql,
@@ -494,20 +520,41 @@ router.put('/edit-product', async (req, res) => {
     (err, result) => {
       if (err) {
         console.error('Error updating product:', err);
-        return res.status(500).json({ success: false, message: 'Error updating product' });
+        return res.status(500).json({ success: false, message: 'Error updating product', details: err.message });
       }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ success: false, message: 'Product not found' });
+      }
+      console.log(`Updated product: ${product_id}`);
       res.json({ success: true, message: 'Product updated successfully!' });
     }
   );
 });
 
+// Delete product route
+router.delete('/delete-product/:product_id', isAdminLoggedIn, (req, res) => {
+  const { product_id } = req.params;
+  const query = `DELETE FROM Product WHERE Product_ID = ?`;
+  connection.query(query, [product_id], (err, result) => {
+    if (err) {
+      console.error('Error deleting product:', err);
+      return res.status(500).json({ success: false, message: 'Database error', details: err.message });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ success: false, message: 'Product not found' });
+    }
+    res.json({ success: true, message: 'Product deleted successfully' });
+  });
+});
+
+module.exports = router;
 
 
 // ---------------ERROR---------------
-const errorPagePath = path.join(__dirname, 'html', 'error.html');
 app.use((req, res) => {
-  res.status(404).sendFile(errorPagePath);
+  res.redirect("/error");
 });
+
 
 // Start server
 const port = process.env.PORT || 4000; // Default to 4000 if no PORT is set
