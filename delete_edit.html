@@ -1,142 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Edit Product</title>
-  <link rel="stylesheet" href="style_add_edit_delete.css">
+  <title>Edit/Delete Product</title>
+  <link rel="stylesheet" href="/style_add_edit_delete.css">
 </head>
-<body>
-  <div class="navbar-PS">
-    <a href="ProductService.html"><img src="home.png" alt="Menu"></a>
-    <div class="nav-icons-PS">
-      <!--span class="search-icon-PS"><a href="SearchPage.html"><img src="search.png"></a></span-->
-      <img class="user-icon-PS" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User">
-    </div>
-</div>
 
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-PS">
+      <a href="/admin-page"><img src="/home.png" alt="Menu"></a>
+      <div class="nav-icons-PS">
+        <img class="user-icon-PS" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User">
+      </div>
+    </div>
+  </nav>
 
   <div class="main">
     <h2>Edit / Delete Product</h2>
     <div class="product-section">
-
-
-      
-      
-      <!-- Image Box -->
-      <div class="img_upload">
-        <label for="product_image">
-          <img id="preview" src="default.png" alt="Current Image" />
-        </label>
-        <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)" />
+      <!-- Search Form -->
+      <div class="search-inline">
+        <form id="search-form">
+          <label for="product_id">Product ID:</label>
+          <input type="text" id="product_id" name="product_id" placeholder="Enter Product ID" required>
+          <button type="submit" class="Search-btn">Search</button>
+        </form>
       </div>
 
+      <!-- Edit/Delete Form -->
+      <div id="edit-form-container" class="fcard" style="display:none;">
+        <form id="edit-form">
+          <input type="hidden" name="product_id" id="edit-product_id">
 
-      <!-- Form -->
-      <div class="fcard">
-         <!-- Search Product ID to edit/delete -->
-         <form method="GET" action="/edit-product-search" class="search-inline">
-            <label for="product_id">Product_ID:</label>
-            <span><input type="text" name="product_id" placeholder="Format : xxxxxxxxxx" required>
-            <button type="submit" class="Search-btn">Search</button></span>
-          </form>
-  
+          <!-- Image Preview -->
+          <div class="fgroup">
+            <label>Current Image:</label>
+            <img id="preview" src="default.png" alt="Current Image" />
+          </div>
+          <div class="fgroup">
+            <label>Change Image:</label>
+            <input type="hidden" name="current_image" id="edit-current_image">
+            <input type="file" id="edit-product_image" name="product_image" accept="image/*" onchange="previewImage(event)">
+          </div>
 
-        <form action="/edit-product/{{id}}" method="POST" enctype="multipart/form-data">
-      
-        <!-- Name + description -->
           <div class="fgroup">
             <label>Product Name:</label>
-            <input type="text" name="product_name" value="{{product_name}}" />
+            <input type="text" name="product_name" id="edit-product_name">
           </div>
+
           <div class="fgroup">
             <label>Description:</label>
-            <textarea name="description">{{description}}</textarea>
+            <textarea name="description" id="edit-description"></textarea>
           </div>
-        <!-- Price + Color -->
+
           <div class="frow">
             <div class="fgroup half">
               <label>Price:</label>
-              <input type="number" name="price" value="{{price}}" />
+              <input type="number" name="price" id="edit-price" step="0.01">
             </div>
             <div class="fgroup half">
               <label>Color:</label>
-              <select name="color">
-                <option {{color=="Yellow" ? "selected" : ""}}>Yellow</option>
-                <option {{color=="Red" ? "selected" : ""}}>Red</option>
-                <option {{color=="Pink" ? "selected" : ""}}>Pink</option>
-                <option {{color=="Grey" ? "selected" : ""}}>Grey</option>
-                <option {{color=="Mint" ? "selected" : ""}}>Mint</option>
-                <option {{color=="Green" ? "selected" : ""}}>Green</option>
-                <option {{color=="Orange" ? "selected" : ""}}>Orange</option>
-                <option {{color=="Purple" ? "selected" : ""}}>Purple</option>
-                <option {{color=="Brown" ? "selected" : ""}}>Brown</option>
-                <option {{color=="Blue" ? "selected" : ""}}>Blue</option>
-              </select>
+              <input type="text" name="color" id="edit-color">
             </div>
           </div>
 
-        <!-- Collection + Iphone -->
           <div class="fgroup">
             <label>Collection:</label>
-            <input type="text" name="collection" value="{{collection}}" />
-          </div>
-          <div class="fgroup">
-            <label>IPhone:</label>
-            <select name="iphone_model">
-              <option {{iphone_model=="iPhone 13" ? "selected" : ""}}>iPhone 13</option>
-              <option {{iphone_model=="iPhone 14" ? "selected" : ""}}>iPhone 14</option>
-              <option {{iphone_model=="iPhone 15" ? "selected" : ""}}>iPhone 15</option>
-            </select>
+            <input type="text" name="collection" id="edit-collection">
           </div>
 
-        <!-- Stock -->
+          <div class="fgroup">
+            <label>iPhone Model:</label>
+            <input type="text" name="iphone_model" id="edit-iphone_model">
+          </div>
+
           <div class="stock">
             <label>Stock:</label>
-            <input type="number" name="stock" value="{{stock}}" />
+            <input type="number" name="stock" id="edit-stock">
           </div>
-        
-        <!-- button -->
+
           <div class="btn">
-            <form method="POST" action="/edit-product/:id">
-            <button type="submit" class="confirm_btn">Confirm</button>
-            </form>
-            <a href="/delete-product/{{id}}" onclick="return confirm('Do you want to delete this product?')" class="delete_btn">Delete</a>
+            <button type="button" id="update-btn" class="confirm_btn">Confirm</button>
+            <button type="button" id="delete-btn" class="delete_btn">Delete</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-
-
-  <div class="footer">
+  <!-- Footer -->
+  <footer>
     <div class="footer-column">
-        <h3><a href="team.html">Samote</a></h3>
-        <h4>About us:</h4>
-        <p>Samote is a passionate group of university students on a mission to make the world a better place—one innovative idea at a time!</p>
+      <h3><a href="/team">Samote</a></h3>
+      <h4>About us:</h4>
+      <p>Samote is a passionate group of university students on a mission to make the world a better place—one
+        innovative idea at a time!</p>
     </div>
     <div class="footer-column">
-        <h3>Leafly</h3>
-        <h4>What is Leafly:</h4>
-        <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.</p>
+      <h3>Leafly</h3>
+      <h4>What is Leafly:</h4>
+      <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.</p>
     </div>
     <div class="footer-column">
-        <div class="last-footer">
-            <h1>Leafly <br> by <br> Samote</h3>
-              <form method="POST" action="/logout">
-                <button type="submit" class="logout_btn" >Logout</button>
-            </form>
-        </div>
-        
+      <div class="last-footer">
+        <h1>Leafly <br> by <br> Samote</h1>
+        <button type="submit" class="logout_btn" id="logoutBtn">Logout</button>
+      </div>
     </div>
-</div>
-
-  <script>
-    function previewImage(event) {
-      const output = document.getElementById('preview');
-      output.src = URL.createObjectURL(event.target.files[0]);
-      output.onload = () => URL.revokeObjectURL(output.src);
-    }
-  </script>
+  </footer>
+  <script src="delete_edit.js"></script>
 </body>
+
 </html>
