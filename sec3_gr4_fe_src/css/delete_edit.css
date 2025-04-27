@@ -1,0 +1,253 @@
+
+/* Footer Section */
+footer {
+  background-color: #685752;
+  color: white;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+
+}
+
+.last-footer {
+  text-align: center;
+}
+
+.footer-column {
+  flex: 1;
+  padding: 0 20px;
+}
+
+
+footer a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-style: italic;
+  text-decoration: underline;
+}
+  
+  
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #685752;
+  padding: 15px 20px;
+}
+
+nav img {
+  width: 30px;
+}
+
+.search-icon {
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+
+}
+
+.search-icon a {
+  text-decoration: none;
+
+}
+
+.search-icon img {
+  width: 25px;
+}
+  
+  
+  
+  /* body */
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5eee9;
+    color: #4a4a4a;
+    margin: 0;
+    padding: 0; /* <- set to 0 */
+  }
+    
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+    
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .product-section {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    
+    .image-upload {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .img_upload img {
+      width: 400px;
+      max-width: 500px;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px #ccc;
+      cursor: pointer;
+    }
+    
+    .img_upload input[type="file"] {
+      display: none;
+    }
+    
+    /* form */
+  
+    .fcard {
+      flex: 2;
+      background: #CAC5BC;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px #aaa;
+      margin-bottom: 30px;
+    }
+    .search-inline {
+      display: flex;
+      align-items: left;
+      gap: 10px; /* ระยะห่างระหว่างช่องกรอกและปุ่ม */
+      margin-bottom: 20px; /* เผื่อมีเนื้อหาต่อด้านล่าง */
+    }
+    
+    .search-inline label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    
+    .search-inline input[type="text"] {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    
+    .Search-btn {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color:#879283;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    
+    .Search-btn:hover {
+      background-color:#6e796d;
+    }
+    
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .fgroup {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .frow {
+      display: flex;
+      gap: 1rem;
+    }
+    
+  
+    .fproduct{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+  
+    
+    .stock{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    input, select, textarea {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      box-shadow: inset 1px 1px 3px #bbb;
+      background: #fefefe;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+  
+  /* button */
+  
+    .btn {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 1rem;
+      
+    }
+    
+    .confirm_btn, .delete_btn, .Search-btn {
+      background: #879283;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      /*size*/
+      height: 42px;
+      min-width: 110px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+  
+    .confirm_btn:hover,.delete_btn:hover {
+      background: #6e796d;
+    }
+  
+    .logout_btn {
+      align-self: center;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Full viewport height */
+      }
+      
+      .page-container > footer {
+        margin-top: auto; /* Push footer to the bottom */
+      }
+      
+      .product-section-add {
+        display: flex;
+        justify-content: center; 
+        align-items: center;    
+        margin: 50px 0;         
+        gap: 50px;              
+    }
