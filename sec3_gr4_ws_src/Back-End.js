@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cors = require('cors');
 const dotenv = require("dotenv");
 const mysql = require("mysql2");
 const router = express.Router();
@@ -7,6 +8,7 @@ const multer = require('multer');
 const fs = require('fs').promises;
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
+const bodyParser = require('body-parser');
 
 
 const app = express();
@@ -16,23 +18,11 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, 'public/uploads'));
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
+    cb(null, Date.now() + path.extname(file.originalname)); // ตั้งชื่อไฟล์เป็น timestamp + extension
   }
 });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // จำกัดขนาดไฟล์ 5MB
-  fileFilter: (req, file, cb) => {
-    const filetypes = /jpeg|jpg|png/;
-    const mimetype = filetypes.test(file.mimetype);
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    if (mimetype && extname) {
-      return cb(null, true);
-    }
-    cb(new Error('Only JPEG/PNG images are allowed'));
-  }
-});
+const upload = multer({ storage: storage });
 
 
 
@@ -55,9 +45,11 @@ function isAdminLoggedIn(req, res, next) {
   }
 }
 
+app.use(bodyParser.json({ limit: '10mb' }));  // 10MB limit
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
 
 // Middleware
-const cors = require('cors');
 app.use(cors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -122,21 +114,21 @@ connection.connect((err) => {
 // ---------------HOME PAGE---------------
 router.get('/api/products', (req, res) => {
   const sql = 'SELECT Product_ID, Product_Name, Price, Product_Img, Collection FROM Product';
-  connection.query(sql, (err, results) => {
+  connection.query(sql, async (err, results) => {
     if (err) {
       console.error('Error fetching products:', err);
       return res.status(500).json({ error: 'Failed to fetch products' });
     }
 
+
+    const mimeType = 'image/jpeg';
     const processedResults = results.map(product => {
-      if (product.Product_Img) {
-        product.Product_Img = `http://localhost:4000/${product.Product_Img}`;
-        // หรือใช้ dynamic host:
-        // const hostUrl = `${req.protocol}://${req.get('host')}`;
-        // product.Product_Img = `${hostUrl}/${product.Product_Img}`;
+      if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
+        product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
       }
       return product;
     });
+
 
     res.json(processedResults);
   });
@@ -144,12 +136,12 @@ router.get('/api/products', (req, res) => {
 
 
 // ---------------DETAIL PAGE---------------
-router.get("/api/product/:id", (req, res) => {
+router.get("/api/product/:id", async (req, res) => {
   console.log('Request at ', req.url)
   const productId = req.params.id;
   const sql = "SELECT * FROM Product WHERE Product_ID = ?";
 
-  connection.query(sql, [productId], (err, results) => {
+  connection.query(sql, [productId], async (err, results) => {
     if (err) {
       console.error("Query error:", err);
       return res.status(500).json({ error: "Internal Server Error" });
@@ -159,18 +151,24 @@ router.get("/api/product/:id", (req, res) => {
       return res.status(404).json({ error: "Product not found" });
     }
 
-    const mimeType = 'image/jpeg';
     const product = results[0];
-    if (product.Product_Img) {
-      product.Product_Img = `http://localhost:4000/${product.Product_Img}`;
+
+    // Check if the product image exists and if it is not in Base64 format
+    if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
+      try {
+        const mimeType = 'image/jpeg';  // Assuming the image is JPEG
+        // Convert the image to a Base64 string
+        product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
+      } catch (err) {
+        console.error('Error reading image file:', err);
+        product.Product_Img = null;  // Set to null if there's an issue
+      }
     }
 
+    // Send the product details as JSON
     res.json(product);
   });
 });
-
-
-//const upload = multer({ storage: storage });
 
 // ---------------SEARCH PAGE---------------
 // SEARCH
@@ -218,7 +216,7 @@ router.get('/search-api', async (req, res) => {
     params.push(Number(priceMax));
   }
 
-  connection.query(sql, params, (err, results) => {
+  connection.query(sql, async (err, results) => {
     if (err) {
       console.error('Search query failed:', err);
       return res.status(500).json({ error: 'Query failed' });
@@ -226,24 +224,26 @@ router.get('/search-api', async (req, res) => {
 
     const seenNames = new Set();
 
-    const processedResults = results
-      .map(product => {
-        if (product.Product_Img) {
-          product.Product_Img = `http://localhost:4000/${product.Product_Img}`;
-        }
-        return product;
-      })
-      .filter(product => {
-        if (seenNames.has(product.Product_Name)) {
-          return false; // ซ้ำ ข้าม
-        }
-        seenNames.add(product.Product_Name);
-        return true; // ยังไม่เคยเจอ เก็บไว้
-      });
+    const mimeType = 'image/jpeg';
+    const processedResults = await Promise.all(results.map(async (product) => {
+      if (product.Product_Img && !product.Product_Img.startsWith('data:image')) {
+        product.Product_Img = `data:${mimeType};base64,${product.Product_Img}`;
+      }
+      return product;
+    }));
 
-    res.json(processedResults);
+    const uniqueResults = processedResults.filter(product => {
+      if (seenNames.has(product.Product_Name)) {
+        return false;
+      }
+      seenNames.add(product.Product_Name);
+      return true;
+    });
+
+    res.json(uniqueResults);
   });
 });
+
 
 const addminPath = path.join(__dirname, 'html', 'ProductService.html');
 
@@ -387,12 +387,9 @@ router.post('/admin-logout', function (req, res) {
   });
 });
 
-
-
-
 // ---------------ADD PRODUCT PAGE---------------
-// add product
-router.post('/add-product', upload.single('product_image'), async (req, res) => {
+// --------------- ADD PRODUCT ---------------
+router.post('/add-product', async (req, res) => {
   const {
     product_id,
     product_name,
@@ -401,13 +398,20 @@ router.post('/add-product', upload.single('product_image'), async (req, res) => 
     price,
     stock,
     collection,
-    iphone_model
+    iphone_model,
+    product_image_base64 // รับค่า Base64 Image
   } = req.body;
 
-  let imagePath = null;
-  // เช็คว่ามีการอัพโหลดไฟล์หรือไม่
-  if (req.file) {
-    imagePath = `/uploads/${req.file.filename}`;
+  let imageData = null;
+  if (product_image_base64) {
+    // ตรวจสอบว่า Base64 ที่รับมาเป็นรูปแบบที่ถูกต้อง
+    const regex = /^data:image\/(jpeg|jpg|png|gif);base64,/;
+    if (regex.test(product_image_base64)) {
+      // ถ้า Base64 ถูกต้อง ให้เก็บเป็น Base64 ในฐานข้อมูล
+      imageData = product_image_base64;
+    } else {
+      return res.status(400).json({ success: false, message: 'Invalid image format' });
+    }
   }
 
   // 1. ตรวจสอบว่า product_id มีในฐานข้อมูลแล้วหรือไม่
@@ -432,7 +436,7 @@ router.post('/add-product', upload.single('product_image'), async (req, res) => 
 
     connection.query(
       sql,
-      [product_id, product_name, description, color, price, stock, collection, iphone_model, imagePath],
+      [product_id, product_name, description, color, price, stock, collection, iphone_model, imageData],
       (err, result) => {
         if (err) {
           console.error('Error inserting product:', err);
@@ -447,12 +451,14 @@ router.post('/add-product', upload.single('product_image'), async (req, res) => 
   });
 });
 
+
+
 // ---------------EDIT---------------
-// ตัวอย่าง route สำหรับการค้นหาสินค้า
-router.get('/edit-product-search', async (req, res) => {
-  const { product_id } = req.params;  // ใช้ req.params แทน req.query
+// serach by product id
+router.get('/edit-product-search/:product_id', async (req, res) => {
+  const { product_id } = req.params;  // แก้ไขตรงนี้
   try {
-      const result = await connection.query('SELECT * FROM products WHERE Product_ID = ?', [product_id]);
+      const result = await connection.query('SELECT * FROM product WHERE Product_ID = ?', [product_id]);
       if (result.length === 0) {
           return res.status(404).json({ message: 'Product not found.' });
       }
@@ -461,6 +467,40 @@ router.get('/edit-product-search', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
   }
 });
+
+// Route สำหรับการแก้ไขข้อมูลสินค้า
+router.put('/edit-product', async (req, res) => {
+  const { product_id, product_name, description, price, color, collection, iphone_model, stock, product_image_base64 } = req.body;
+
+  let imageData = null;
+  if (product_image_base64) {
+    const regex = /^data:image\/(jpeg|jpg|png|gif);base64,/;
+    if (regex.test(product_image_base64)) {
+      imageData = product_image_base64;
+    } else {
+      return res.status(400).json({ success: false, message: 'Invalid image format' });
+    }
+  }
+
+  const sql = `
+    UPDATE product
+    SET Product_Name = ?, Description = ?, Price = ?, Color = ?, Collection = ?, Iphone_Model = ?, Stock_Quantity = ?, Product_Img = ?
+    WHERE Product_ID = ?
+  `;
+
+  connection.query(
+    sql,
+    [product_name, description, price, color, collection, iphone_model, stock, imageData, product_id],
+    (err, result) => {
+      if (err) {
+        console.error('Error updating product:', err);
+        return res.status(500).json({ success: false, message: 'Error updating product' });
+      }
+      res.json({ success: true, message: 'Product updated successfully!' });
+    }
+  );
+});
+
 
 
 // ---------------ERROR---------------
