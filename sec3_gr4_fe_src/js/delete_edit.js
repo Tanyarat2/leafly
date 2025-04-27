@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log('Edit response status:', response.status);
         const responseText = await response.text();
         console.log('Edit response text:', responseText);
-  
+        window.location.href = '/admin-page';
         let result;
         try {
           result = JSON.parse(responseText);
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           if (!response.ok) {
             throw new Error(result || 'Error deleting product');
           }
-  
+          window.location.href = '/admin-page';
           alert('Product deleted successfully');
           editFormContainer.style.display = 'none';
           editForm.reset();
