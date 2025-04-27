@@ -17,11 +17,6 @@
   <div class="main">
     <h2>Edit / Delete Product</h2>
     <div class="product-section">
-      <!-- Image Preview -->
-      <div class="img_upload">
-        <img id="preview" src="default.png" alt="Current Image" />
-      </div>
-
       <!-- Search Form -->
       <div class="search-inline">
         <form id="search-form">
@@ -33,10 +28,10 @@
 
       <!-- Edit/Delete Form -->
       <div id="edit-form-container" class="fcard" style="display:none;">
-        <form id="edit-form" enctype="multipart/form-data">
+        <form id="edit-form">
           <input type="hidden" name="product_id" id="edit-product_id">
 
-          <!-- รูป -->
+          <!-- Image Preview -->
           <div class="fgroup">
             <label>Current Image:</label>
             <img id="preview" src="default.png" alt="Current Image" />
@@ -44,10 +39,9 @@
           <div class="fgroup">
             <label>Change Image:</label>
             <input type="hidden" name="current_image" id="edit-current_image">
-            <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)">
+            <input type="file" id="edit-product_image" name="product_image" accept="image/*"
+              onchange="previewImage(event)">
           </div>
-
-
 
           <div class="fgroup">
             <label>Product Name:</label>
@@ -62,7 +56,7 @@
           <div class="frow">
             <div class="fgroup half">
               <label>Price:</label>
-              <input type="number" name="price" id="edit-price">
+              <input type="number" name="price" id="edit-price" step="0.01">
             </div>
             <div class="fgroup half">
               <label>Color:</label>
@@ -83,12 +77,6 @@
           <div class="stock">
             <label>Stock:</label>
             <input type="number" name="stock" id="edit-stock">
-          </div>
-
-          <div class="fgroup">
-            <label>Change Image:</label>
-            <input type="hidden" name="current_image" id="edit-current_image">
-            <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)">
           </div>
 
           <div class="btn">
@@ -118,13 +106,12 @@
     <div class="footer-column">
       <div class="last-footer">
         <h1>Leafly <br> by <br> Samote</h1>
-          <button type="submit" class="logout_btn" id="logoutBtn">Logout</button>
+        <button type="submit" class="logout_btn" id="logoutBtn">Logout</button>
       </div>
     </div>
-    
-    </footer>
 
-  <script src="delete_edit.js"> </script>
+  </footer>
+  <script src="delete_edit.js"></script>
 </body>
 
 </html>
