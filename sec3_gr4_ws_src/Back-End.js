@@ -214,7 +214,8 @@ router.get('/search-api', async (req, res) => {
     params.push(Number(priceMax));
   }
 
-  connection.query(sql, async (err, results) => {
+  // 💥💥💥 FIX is here: pass "params" to the query
+  connection.query(sql, params, async (err, results) => {
     if (err) {
       console.error('Search query failed:', err);
       return res.status(500).json({ error: 'Query failed' });
@@ -241,9 +242,6 @@ router.get('/search-api', async (req, res) => {
     res.json(uniqueResults);
   });
 });
-
-
-const addminPath = path.join(__dirname, 'html', 'ProductService.html');
 
 // ---------------ADMIN PAGE---------------
 // ตรวจสอบ session ในฝั่งเซิร์ฟเวอร์เมื่อเข้าสู่ /admin-page
@@ -440,7 +438,7 @@ router.post('/add-product', async (req, res) => {
           return res.status(500).json({ success: false, message: 'Error inserting product' });
         }
         console.log(`Add new product : [${product_id}] Product name: ${product_name}, iPhone model: ${iphone_model}, Collection: ${collection}, Color: ${color}`);
-        
+
         // ตอบกลับด้วย JSON
         res.json({ success: true, message: 'Product added successfully!', redirect: '/admin-page' });
       }
