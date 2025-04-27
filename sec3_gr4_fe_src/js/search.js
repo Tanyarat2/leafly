@@ -28,6 +28,7 @@ function searchProduct(event) {
   fetch(`http://localhost:4000/search-api?${query.toString()}`)
     .then(res => res.json())
     .then(data => {
+      console.log(data);
       const container = document.getElementById('resultsContainer');
       container.innerHTML = '';
 
