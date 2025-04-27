@@ -204,7 +204,13 @@ nav img {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
+
+.add-icon-PS a {
+    text-decoration: none;
+    color: white;
+  }
 
 .button-container-PS {
     display: flex;
@@ -215,19 +221,17 @@ nav img {
 .edit-delete-btn-PS {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color:#8B9C89;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     text-align: center;
   }
   
-  .footer-column h3 a {
-    color: inherit; /* Makes "Samote" the same color as the surrounding text */
-    font-style: italic;
-}
-
-/* Product Service Page */
+  .edit-delete-btn-PS a {
+    text-decoration: none;
+    color: white;
+  }
 
 
 /* Footer Section */
