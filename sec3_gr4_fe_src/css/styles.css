@@ -9,19 +9,15 @@ body {
     /* font-family: Inter; */
 }
 
-.header img {
-    width: 230px;
-    /* Set the width */
-    height: 100px;
-    /* Set the height */
-    background-color: #685752;
-    object-fit: contain;
-    /* Ensures the image fills the area properly*/
-    border-radius: 10px;
+.map {
+    text-align: left;
+    margin: 30px;
+    color: #685752;
 }
 
+
 /* Navigation Bar */
-.navbar {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,7 +25,7 @@ body {
     padding: 15px 20px;
 }
 
-.navbar img {
+nav img {
     width: 30px;
 }
 
@@ -50,9 +46,21 @@ body {
 }
 
 /* Header Section */
-.header {
+header {
     text-align: center;
     padding: 20px;
+}
+
+
+header img {
+    width: 230px;
+    /* Set the width */
+    height: 100px;
+    /* Set the height */
+    background-color: #685752;
+    object-fit: contain;
+    /* Ensures the image fills the area properly*/
+    border-radius: 10px;
 }
 
 .logo {
@@ -68,6 +76,7 @@ body {
     color: #685752;
     font-weight: bold;
 }
+
 
 
 /* Product Section */
@@ -114,7 +123,7 @@ a.product{
 }
 
 /* Footer Section */
-.footer {
+footer {
     background-color: #685752;
     color: white;
     padding: 20px;
@@ -129,14 +138,13 @@ a.product{
     text-align: center;
 }
 
-/* Ensure each column has equal width */
 .footer-column {
     flex: 1;
     padding: 0 20px;
 }
 
-/* Style links */
-.footer a {
+
+footer a {
     color: rgb(255, 255, 255);
     text-decoration: none;
     font-style: italic;
