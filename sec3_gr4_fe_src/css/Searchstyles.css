@@ -7,30 +7,35 @@ body {
     /* font-family: Inter; */
 }
 /* Navigation Bar */
-.navbar {
+
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #685752;
     padding: 15px 20px;
 }
-.navbar img {
+
+nav img {
     width: 30px;
 }
+
 .search-icon {
     font-size: 20px;
     color: white;
     cursor: pointer;
+
 }
 
 .search-icon a {
     text-decoration: none;
-   
+
 }
 
 .search-icon img {
     width: 25px;
 }
+
 
 
 /* Product Section */
@@ -216,8 +221,9 @@ input, select {
 
 
 /*------- End Search Page -------*/
+
 /* Footer Section */
-.footer {
+footer {
     background-color: #685752;
     color: white;
     padding: 20px;
@@ -232,21 +238,16 @@ input, select {
     text-align: center;
 }
 
-/* Ensure each column has equal width */
 .footer-column {
     flex: 1;
     padding: 0 20px;
 }
 
-/* Style links */
-.footer a {
-    color: white;
+
+footer a {
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    font-weight: bold;
     font-style: italic;
     text-decoration: underline;
 }
-
-
-
 
