@@ -30,7 +30,6 @@ function initMap() {
 
 // ทำให้ initMap เป็น global function
 window.initMap = initMap;
-
 // ดึงข้อมูลสินค้าตอนโหลดหน้า
 function fetchProducts() {
   fetch('http://localhost:4000/api/products')
@@ -51,14 +50,22 @@ function fetchProducts() {
         })
         .slice(0, 5);
 
-        NewCollectionProducts.forEach(product => {
+      NewCollectionProducts.forEach(product => {
         console.log(`Product ID for ${product.Product_Name}: ${product.Product_ID}`);
         const productElement = document.createElement('a');
         productElement.classList.add('product');
         productElement.href = `detail.html?id=${product.Product_ID}`;
 
         const productImage = document.createElement('img');
-        productImage.src = product.Product_Img; // ใช้ URL ตรงๆ ไม่ต้องแปลง base64 แล้ว
+
+        if (product.Product_Img) {
+          // สมมุติ product.Product_Img เป็น base64 มาแล้ว เช่น "data:image/jpeg;base64,...."
+          productImage.src = product.Product_Img;
+        } else {
+          // ถ้าไม่มีรูป เอารูป placeholder แทน
+          productImage.src = 'placeholder.jpg';
+        }
+
         productImage.alt = product.Product_Name;
 
         const productName = document.createElement('p');
