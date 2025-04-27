@@ -151,3 +151,21 @@ body {
     width: 120px;
     object-fit: cover;
 }
+
+
+/* for member contact */
+.contact-member-link {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 30px;
+    background-color: transparent; 
+}
+
+.contact-member-link a {
+    color: #685752;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: underline;
+    font-style: italic;
+}
+
