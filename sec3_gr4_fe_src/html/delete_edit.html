@@ -2,118 +2,135 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Edit/Delete Product</title>
-  <link rel="stylesheet" href="delete_edit.css">
+  <meta charset="UTF-8" />
+  <title>Add new product</title>
+  <link rel="stylesheet" href="add.css" />
 </head>
 
+
 <body>
+
+
   <!-- Navbar -->
   <nav>
     <a href="/home"><img src="home.png" alt="Menu"></a>
     <span class="search-icon"><a href="/search"><img src="search.png"></a></span>
   </nav>
-<div class="page-container">
+
+
   <div class="main">
-    <h2>Edit / Delete Product</h2>
-    <div class="product-section">
-      <!-- Search Form -->
-      <div class="search-inline">
-        <form id="search-form">
-          <label for="product_id">Product ID:</label>
-          <input type="text" id="product_id" name="product_id" placeholder="Enter Product ID" required>
-          <button type="submit" class="Search-btn">Search</button>
-        </form>
-      </div>
-
-      <!-- Edit/Delete Form -->
-      <div id="edit-form-container" class="fcard" style="display:none;">
-        <form id="edit-form">
-          <input type="hidden" name="product_id" id="edit-product_id">
-
-          <!-- Image Preview -->
-          <div class="fgroup">
-            <label>Current Image:</label>
-            <img id="preview" src="default.png" alt="Current Image" />
+    <h2>Add new product</h2>
+    <div class="product-section-add">
+      <!-- Image Upload Box -->
+      <form id="add-product-form" action="/add-product" method="POST" enctype="multipart/form-data">
+        <div class="img_upload">
+          <label for="product_image">
+            <img id="preview" src="default.png" alt="Preview" />
+          </label>
+          <input type="file" id="product_image" name="product_image" accept="image/*" onchange="previewImage(event)" required />
+        </div>
+      
+        <!-- Form Section -->
+        <div class="fcard">
+          <!-- ID -->
+          <div class="form-group">
+            <label>Product ID:</label>
+            <input type="text" name="product_id" placeholder="Product ID..." required />
           </div>
-          <div class="fgroup">
-            <label>Change Image:</label>
-            <input type="hidden" name="current_image" id="edit-current_image">
-            <input type="file" id="edit-product_image" name="product_image" accept="image/*"
-              onchange="previewImage(event)">
-          </div>
-
+      
+          <!-- Product Name + Description -->
           <div class="fgroup">
             <label>Product Name:</label>
-            <input type="text" name="product_name" id="edit-product_name">
+            <input type="text" name="product_name" placeholder="Name of the product..." required />
           </div>
-
           <div class="fgroup">
             <label>Description:</label>
-            <textarea name="description" id="edit-description"></textarea>
+            <textarea name="description" placeholder="Description..."></textarea>
           </div>
-
+      
+          <!-- Price + Color -->
           <div class="frow">
             <div class="fgroup half">
               <label>Price:</label>
-              <input type="number" name="price" id="edit-price" step="0.01">
+              <input type="number" name="price" placeholder="Price..." step="0.01" min="0" required />
             </div>
             <div class="fgroup half">
               <label>Color:</label>
-              <input type="text" name="color" id="edit-color">
+              <select name="color" required>
+                <option value="" disabled selected>Select</option>
+                <option>Yellow</option>
+                <option>Red</option>
+                <option>Pink</option>
+                <option>Grey</option>
+                <option>Mint</option>
+                <option>Green</option>
+                <option>Orange</option>
+                <option>Purple</option>
+                <option>Brown</option>
+                <option>Blue</option>
+              </select>
             </div>
           </div>
-
+      
+          <!-- Collection + iPhone -->
           <div class="fgroup">
             <label>Collection:</label>
-            <input type="text" name="collection" id="edit-collection">
+            <input type="text" name="collection" required />
           </div>
-
           <div class="fgroup">
-            <label>iPhone Model:</label>
-            <input type="text" name="iphone_model" id="edit-iphone_model">
+            <label>IPhone:</label>
+            <select name="iphone_model" required>
+              <option value="" disabled selected>Select</option>
+              <option>iPhone 14</option>
+              <option>iPhone 15</option>
+              <option>iPhone 16</option>
+            </select>
           </div>
-
+      
+          <!-- Stock -->
           <div class="stock">
             <label>Stock:</label>
-            <input type="number" name="stock" id="edit-stock">
+            <input type="number" name="stock" required />
           </div>
-
+      
+          <!-- Submit Button -->
           <div class="btn">
-            <button type="button" id="update-btn" class="confirm_btn">Confirm</button>
-            <button type="button" id="delete-btn" class="delete_btn">Delete</button>
+            <button type="submit" class="confirm_btn">Confirm</button>
           </div>
-        </form>
+        </div>
+      </form>
+      
+      
       </div>
     </div>
-  </div>
 
-  <!-- FOOTER -->
+
+ <!-- FOOTER -->
   <footer>
 
-    <div class="footer-column">
-      <h3><a href="/team">Samote</a></h3>
-      <h4>About us:</h4>
-      <p>Samote is a passionate group of university students on a mission to make the world a better place—one
-        innovative idea at a time!</p>
-    </div>
-    <div class="footer-column">
-      <h3>Leafly</h3>
-      <h4>What is Leafly:</h4>
-      <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.
-      </p>
-    </div>
-    <div class="footer-column">
-      <div class="last-footer">
-        <h1>Leafly <br> by <br> Samote</h1>
+  <div class="footer-column">
+    <h3><a href="/team">Samote</a></h3>
+    <h4>About us:</h4>
+    <p>Samote is a passionate group of university students on a mission to make the world a better place—one
+      innovative idea at a time!</p>
+  </div>
+  <div class="footer-column">
+    <h3>Leafly</h3>
+    <h4>What is Leafly:</h4>
+    <p>Leafly crafts sustainable phone cases from recycled plastics, reinvesting profits to support the community.
+    </p>
+  </div>
+  <div class="footer-column">
+    <div class="last-footer">
+      <h1>Leafly <br> by <br> Samote</h1>
         <button type="submit" class="logout_btn" id="logoutBtn">Logout</button>
-      </div>
     </div>
-
+  </div>
+  
   </footer>
+  
 
-</div> 
-  <script src="delete_edit.js"></script>
+  <script src="add.js"></script>
 </body>
 
 </html>
