@@ -1,6 +1,5 @@
-# Leafly Web Application
+# Leafly Website
 
-![Node.js](https://img.shields.io/badge/Node.js-Express-green)
 
 This is the project for our ITCS223 Web Development Phase II
 
