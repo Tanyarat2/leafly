@@ -167,7 +167,7 @@ router.post("/admin-login", function (req, res) {
     return res.status(400).json({ success: false, message: "Missing credentials" });
   }
 
-  // Get the first name and last name from the Admin_info table where that admin_id is that login.  const adminInfoSql = `SELECT * FROM Admin_info WHERE admin_id = ?`;
+  // Get the first name and last name from the Admin_info table where that admin_id is that login. 
   const adminInfoSql = `SELECT * FROM Admin_info WHERE admin_id = ?`;
   connection.query(adminInfoSql, [admin_id], (err, adminResults) => {
     if (err) {
