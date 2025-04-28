@@ -38,23 +38,16 @@ This is the project for our ITCS223 Web Development Phase II
 
 3. **Folder Structure:**
    ```
-   Leafly-express (root)
+  Leafly-express (root)
    ├── sec3_gr4_fe_src
    │   ├── css
    │   ├── html
    │   ├── images
-   │   └── js
+   │   ├── js
+   │   └── Front-End.js
    └── sec3_gr4_ws_src
        └──Back-End.js
    
-   ```
-
-4. **Create `.env` File in `sec3_gr4_ws_src`:**
-   ```
-   DB_HOST=localhost
-   DB_USER=Samote
-   DB_PASSWORD=Hellosamote1234***
-   DB_NAME=sec3_gr4_database
    ```
 
 ---
@@ -62,10 +55,17 @@ This is the project for our ITCS223 Web Development Phase II
 ## Running the Website
 
 1. **Open VS Code and Open Folder `Leafly-express`.**
+2. **Create `.env` File in `sec3_gr4_ws_src`:**
+   ```
+   DB_HOST=localhost
+   DB_USER=Samote
+   DB_PASSWORD=Hellosamote1234***
+   DB_NAME=sec3_gr4_database
+   ```
 
-2. **Split Terminal:**
+3. **Split Terminal:**
    (Image of split terminal provided separately)
-   // ![Alt text] (image_url)
+   ![Split Terminal](image_url)
 
 4. **First Terminal (Front-End setup):**
    ```bash
@@ -96,8 +96,28 @@ This is the project for our ITCS223 Web Development Phase II
        "start": "node Back-End.js"
      }
      ```
+6.  **Folder Structure:**
+   ```
+   Leafly-express (root)
+   ├── sec3_gr4_fe_src
+   │   ├── >css
+   │   ├── >html
+   │   ├── >images
+   │   ├── >js
+   │   ├── >node_modules
+   │   ├── package-lock.json
+   │   ├── package.json
+   │   └── Front-End.js
+   └── sec3_gr4_ws_src
+       ├── >node_modules
+       ├── .env
+       ├── package-lock.json
+       ├── package.json
+       └── Back-End.js
+   
+   ```
 
-6. **Start both servers:**
+7. **Start both servers:**
    - On **both terminals**, type:
      ```bash
      npm start
@@ -145,7 +165,7 @@ This is the project for our ITCS223 Web Development Phase II
 ### Admin Features:
 
 - **Add Product**
-  - Visit [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
+[http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
   - Click "**Add**" card to add a new product.
   - Example Product Details:
     - Product ID: `25PLGF1601`
@@ -158,7 +178,7 @@ This is the project for our ITCS223 Web Development Phase II
     - Stock: `100`
 
 - **Edit Product**
-  - Visit [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
+  [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
   - Input Product ID: `25PLGF1601`, click **Search**.
   - Modify any product details (e.g., change image, stock, price) then click **Confirm**.
 
