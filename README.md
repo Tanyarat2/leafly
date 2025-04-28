@@ -47,7 +47,6 @@ This is the project for our ITCS223 Web Development Phase II
    │   └── Front-End.js
    └── sec3_gr4_ws_src
        └──Back-End.js
-   
    ```
 
 ---
