@@ -1,36 +1,36 @@
 function initMap() {
   console.log("initMap function called");
 
-  // กำหนดพิกัด Leafly Store (สินธร มหิดล)
+  // Leafly Store location (สินธร มหิดล)
   const leaflyStore = { lat: 13.7947, lng: 100.3252 };
 
-  // สร้างแผนที่
+  // Maps
   const map = new google.maps.Map(document.getElementById("map"), {
     center: leaflyStore,
     zoom: 16,
   });
 
-  // ปักหมุด
+  // Maps marker
   const marker = new google.maps.Marker({
     position: leaflyStore,
     map: map,
     title: "Leafly Store",
   });
 
-  // กล่องข้อความเมื่อคลิกหมุด
+  // Message box when click Maps marker
   const infowindow = new google.maps.InfoWindow({
     content: "<strong>Leafly Store @ Salaya</strong>",
   });
 
-  // เปิดกล่องข้อความเมื่อคลิกที่หมุด
+  // Open message box when click Maps marker
   marker.addListener("click", () => {
     infowindow.open(map, marker);
   });
 }
 
-// ทำให้ initMap เป็น global function
+// Make initMap global function
 window.initMap = initMap;
-// ดึงข้อมูลสินค้าตอนโหลดหน้า
+// Pull product indormation when loading
 function fetchProducts() {
   fetch('http://localhost:4000/api/products')
     .then(response => response.json())
@@ -59,10 +59,10 @@ function fetchProducts() {
         const productImage = document.createElement('img');
 
         if (product.Product_Img) {
-          // สมมุติ product.Product_Img เป็น base64 มาแล้ว เช่น "data:image/jpeg;base64,...."
+          
           productImage.src = product.Product_Img;
         } else {
-          // ถ้าไม่มีรูป เอารูป placeholder แทน
+          // If no picture use placeholder instead
           productImage.src = 'placeholder.jpg';
         }
 
