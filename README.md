@@ -15,7 +15,11 @@ This is the project for our ITCS223 Web Development Phase II.
    - Password: `Hellosamote1234***`
    - Authentication Type: `caching_sha2_password`
    - Host: `localhost`
-   - Account Limits: All `100`
+   - Account Limits:
+   - Max. Queries: 0
+   - Max. Updates: 100
+   - Max. Updates: 100
+   - Max. Updates: 100
    - Set privileges on `sec3_gr4_database`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
 
 3. **Test the Database:**
