@@ -1,7 +1,7 @@
 function initMap() {
   console.log("initMap function called");
 
-  // Leafly Store location 
+  // Leafly Warehouse location 
   const leaflyStore = { lat: 13.7947, lng: 100.3252 };
 
   // Maps
