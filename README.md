@@ -162,7 +162,7 @@ This is the project for our ITCS223 Web Development Phase II.
 
 ### Admin Features:
 
-![Split Terminal](Example-Leafly/Readme-img/Admin.png)
+![Admin Page](Example-Leafly/Readme-img/Admin.png)
 
 - **Add Product**  
   [http://localhost:3000/add-page](http://localhost:3000/add-page)
@@ -183,9 +183,9 @@ This is the project for our ITCS223 Web Development Phase II.
 - **Edit Product**  
   [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
   - Input Product ID: `25PLGF1601`, click **Search**.
-  - ![Split Terminal](Example-Leafly/Readme-img/productID_edit.png)
+  - ![ProductID_edit](Example-Leafly/Readme-img/ProductID_edit.png)
   - Modify any product details (e.g., change image, stock, price) then click **Confirm**.
-  - ![Split Terminal](Example-Leafly/Readme-img/Edit.png)
+  - ![Edit](Example-Leafly/Readme-img/Edit.png)
 - **Delete Product**  
   - Same as Edit, but click **Delete** to remove the product.
 
