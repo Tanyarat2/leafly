@@ -1,6 +1,3 @@
-Here's the complete **README.md** that you can copy and paste directly:
-
-```markdown
 # Leafly Website
 
 This is the project for our ITCS223 Web Development Phase II.
@@ -208,9 +205,3 @@ This is the project for our ITCS223 Web Development Phase II.
 - 6688071 Ornrumpa Nirundorn  
 - 6688117 Thanyarat Suksuwan  
 - 6688120 Pannatorn Suyaoei
-
----
-
-```
-
-You can now copy this entire block and paste it into your **README.md** file. Let me know if you need any further adjustments!
