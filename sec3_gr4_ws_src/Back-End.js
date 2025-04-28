@@ -436,6 +436,16 @@ router.get("/api/product/:id", async (req, res) => {
 3. Product/Service management web service for administrators
 
 ** MAKE SURE YOU ARE LOGGED IN FIRST **
+
+Login :
+Method: POST
+URL: http://localhost:4000/admin-login
+Body: raw JSON
+{
+    "admin_id": "AD67093",
+    "password": "Mantrajennie444"
+}
+    
 // We collect images as Base64. It's too long to include in comments,
 // so we provide a sample Base64 string for testing.
 
