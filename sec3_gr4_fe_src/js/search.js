@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Show when search with no criteria / show all product
   searchProduct();
 });
 
+// Function to go back to the previous page
 function closeSearch() {
   window.history.back();
 }
 
+// Function to search for products based on the form input
 function searchProduct(event) {
   if (event) event.preventDefault();
 
@@ -25,12 +28,13 @@ function searchProduct(event) {
     'price-max': priceMax
   });
 
+  // Send a request to the back-end with the search query
   fetch(`http://localhost:4000/search-api?${query.toString()}`)
     .then(res => res.json())
     .then(data => {
       console.log(data);
       const container = document.getElementById('resultsContainer');
-      container.innerHTML = '';
+      container.innerHTML = ''; // Clear previous results
 
       if (data.length === 0) {
         container.innerHTML = '<p>No products found.</p>';
@@ -47,7 +51,7 @@ function searchProduct(event) {
           <p class="product-name">${product.Product_Name}</p>
           <p class="product-price">฿${product.Price}</p>
         `;
-        container.appendChild(productDiv);
+        container.appendChild(productDiv); // Add to the container
       });
     })
     .catch(err => {
