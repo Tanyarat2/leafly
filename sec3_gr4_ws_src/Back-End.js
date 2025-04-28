@@ -254,10 +254,8 @@ router.post('/admin-logout', function (req, res) {
       connection.query(updateLogSql, [logoutTime, admin_id, latestLoginTime], (error) => {
         if (error) {
           console.error("Logout log update failed:", error);
-        } else {
-          console.log("Logout time updated successfully.");
-        }
-
+        } 
+        
         // Destroy session and clear cookie
         req.session.destroy((err) => {
           if (err) {
