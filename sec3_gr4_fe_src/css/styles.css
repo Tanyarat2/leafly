@@ -163,19 +163,35 @@ footer a {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 30px;
     padding: 20px;
 }
 
-.teampic {
+/* .teampic {
     background-color: #685752;
     padding: 15px;
     text-align: center;
     width: 120px;
-    /* border-radius: 10px; */
-}
+    border-radius: 10px; 
+} */
 
 .teampic img {
     width: 120px;
     object-fit: cover;
+}
+
+/* for member contact */
+.contact-member-link {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 30px;
+    background-color: transparent; 
+}
+
+.contact-member-link a {
+    color: #685752;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: underline;
+    font-style: italic;
 }
