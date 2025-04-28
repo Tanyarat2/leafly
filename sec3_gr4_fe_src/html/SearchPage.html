@@ -8,14 +8,15 @@
     <title>Advanced Search</title>
 </head>
 
-  <!-- Navbar -->
+
+<body>
+
+    <!-- Navbar -->
     <nav>
         <a href="/home"><img src="home.png" alt="Menu"></a>
         <span class="search-icon"><a href="/search"><img src="search.png"></a></span>
     </nav>
 
-<!-- Search -->
-<body>
     <div class="container">
         <div class="search_header">
             <h2 class="underline">Advanced Search</h2>
@@ -24,6 +25,7 @@
             </button>
         </div>
 
+        <!-- Search section -->
         <div class="search-center-wrapper">
             <form class="search-form" action="/search" method="GET">
                 <div class="form-grid-2rows">
@@ -35,7 +37,7 @@
                     </div>
 
                     <div class="form-item model">
-                          <!-- model -->
+                          <!-- Model (dropdown)-->
                         <label for="model">iPhone Model</label>
                         <select id="model" name="model">
                             <option value="">iPhone Model..</option>
@@ -46,7 +48,7 @@
                     </div>
 
                     <div class="form-item color">
-                          <!-- Color -->
+                          <!-- Color (dropdown)-->
                         <label for="color">Color</label>
                         <select id="color" name="color">
                             <option value="">Color..</option>
@@ -65,7 +67,7 @@
 
                     <!-- Row 2 -->
                     <div class="form-item collection"> 
-                         <!-- collection -->
+                         <!-- Collection (dropdown)-->
                         <label for="collection">Collection</label>
                         <select id="collection" name="collection">
                             <option value="">Select Collection</option>
@@ -126,5 +128,4 @@
 </body>
 
 </html>
-
 
