@@ -166,9 +166,10 @@ This is the project for our ITCS223 Web Development Phase II.
 
 - **Add Product**  
   [http://localhost:3000/add-page](http://localhost:3000/add-page)
-  ![Split Terminal](Example-Leafly/Readme-img/Addd.png)
+  ![Add](Example-Leafly/Readme-img/Add.png)
   - Click "**Add**" card to add a new product.
   - Example Product Details:
+    - Image : **You can find it in the "Example-Leafly" folder**
     - Product ID: `25PLGF1601`
     - Product Name: `Green Forest`
     - Description: Protect your phone with the Green Forest Phone Case, designed with vibrant, eco-friendly materials.
