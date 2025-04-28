@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // ----------- Check Admin Status -----------
+    // Check Admin Status
     try {
       const response = await fetch('http://localhost:4000/check-admin', {
         method: 'GET',
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     };
   
-    // Convert file to base64
+    // Convert file to Base64
     const toBase64 = file => new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Update form submission
     updateBtn.addEventListener('click', async () => {
       const productImageFile = editForm.product_image.files[0];
-      let base64Image = editForm.current_image.value; // Default to current image
+      let base64Image = editForm.current_image.value; 
   
       if (productImageFile) {
         try {
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   
-    // ----------- Logout -----------
+    // Logout
     if (logoutBtn) {
       logoutBtn.addEventListener('click', async (e) => {
         e.preventDefault();
