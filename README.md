@@ -14,10 +14,13 @@ This is the project for our ITCS223 Web Development Phase II.
    - Username: `Samote`
    - Password: `Hellosamote1234***`
    - Set privileges on `sec3_gr4_database`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+   - Host: localhost
+   - Resource Limits: All 100
 
 3. **Test the Database:**
    - Run SQL command:
      ```sql
+     USE sec3_gr4_database;
      SELECT * FROM Admin_Info;
      ```
    - It should return **10 rows**.
