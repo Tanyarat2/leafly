@@ -1,7 +1,7 @@
 function initMap() {
   console.log("initMap function called");
 
-  // Leafly Store location (สินธร มหิดล)
+  // Leafly Store location 
   const leaflyStore = { lat: 13.7947, lng: 100.3252 };
 
   // Maps
@@ -30,7 +30,7 @@ function initMap() {
 
 // Make initMap global function
 window.initMap = initMap;
-// Pull product indormation when loading
+// Pull product information when loading
 function fetchProducts() {
   fetch('http://localhost:4000/api/products')
     .then(response => response.json())
