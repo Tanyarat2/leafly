@@ -1,37 +1,15 @@
+/*use for login.html*/
+
 /* General Styles */
 body {
-    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-family:Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #F5F5F0;
     color: #ffffff;
-    /* font-family: Inter; */
-}
-.login-box h2 {
-    font-size: 30px;
-}
-
-.login-box {
-    color: #685752;
-    text-align: center;
-}
-
-.login-btn:hover {
-    background-color: #6A6F4C;
-}
-
-.login-btn {
-    color: white;
-    background-color: #6A6F4C;
-    border-radius: 5px;
-    padding: 8px 17px; 
-    font-size: 18px; 
-    width: auto; 
 }
 
 /* Navigation Bar */
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -60,54 +38,27 @@ nav img {
     width: 25px;
 }
 
-
-/* Header Section */
-.header {
-    text-align: center;
-    padding: 20px;
-}
-.logo {
-    background: #685752;
-    color: #C5D1B2;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-.tagline {
-    font-style: italic;
+/* login section */
+.login-box {
     color: #685752;
-    font-weight: bold;
+    text-align: center;
 }
 
-/* Product Section */
-.product-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
+.login-box h2 {
+    font-size: 30px;
 }
-.product {
-    background-color: #879283;
-    padding: 15px;
-    text-align: center;
-    width: 180px;
-    border-radius: 10px;
+
+.login-btn:hover {
+    background-color: #6A6F4C;
 }
-.product img {
-    width: 100%;
-    border-radius: 10px;
-    width: 170px;  /* Set the width */
-    height: 200px; /* Set the height */
-    object-fit: cover;
-}
-.product-name {
-    font-weight: bold;
-    margin: 10px 0;
-}
-.product-price {
-    color: #ffffff;
-    font-size: 16px;
+
+.login-btn {
+    color: white;
+    background-color: #6A6F4C;
+    border-radius: 5px;
+    padding: 8px 17px; 
+    font-size: 18px; 
+    width: auto; 
 }
 
 /* Footer Section */
@@ -130,7 +81,6 @@ footer {
     flex: 1;
     padding: 0 20px;
 }
-
 
 footer a {
     color: rgb(255, 255, 255);
