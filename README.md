@@ -199,7 +199,7 @@ This is the project for our ITCS223 Web Development Phase II.
 
 - Admin session will expire after **3 hours**.
 - Make sure MySQL Server is running before starting the backend server.
-- Some browsers may block cookies when frontend and backend are on different ports — allow cookies manually if needed.
+- Some browsers may block cookies when frontend and backend are on different ports allow cookies manually if needed.
 
 ---
 
