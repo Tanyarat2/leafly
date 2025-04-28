@@ -1,78 +1,26 @@
-# leafly
+# Project Name
 
+## Description
+Short description of your project.
 
-TODO LIST
-//ใครจะทำไรอยู่ให้พิมพ์ชื่อท้ายข้างล่างนี้ไว้จะได้รุ้ว่ามีคนทำแล้ว
-ทุกหน้า comment แบบสวย  ( team.html, home.html, home.js, detail.html )
-ใส่ <> ให้ถูก fotter nav ไรงี้ทำให้ถูกต้่องๆๆ แก้<div class=footer> ไรพวกนี้กะได้ แต่ต้องแก้ในcss ด้วย
-- หน้า team รอจากพลอย
-- หน้า home +ทำตรงgoogle maps สีข้อแความ ชื่อร้าน
-- detail.html แก้ css ไหมอ่ะ ที่เคยบอกว่าหน้ามันขยายไปตาม description
+## Installation
+1. npm install
+2. Setup database
+3. node back-end.js
+4. node front-end.js
 
--------------------------------------------------------------------------------------------------------------------------
+## Usage
+- Front-end: http://localhost:3000
+- Admin: http://localhost:3001/admin-login
 
+## Technologies
+- Node.js
+- Express
+- MySQL
 
+## Known Issues
+- Session expires quickly.
 
-
-
-
-อย่าเพิ่ง
-http://localhost:4000/
-
-
-เริ่มแรก
-1.โหลดดาต้าเบส .sql ไป 
-2.ไปเชื่อมserver ในดาต้าเบสตามนี้ server> user and previleges
-
-localhost
-
-USER = Samote
-
-PASSWORD = Hellosamote1234***
-
-DB_NAME = sec3_gr4_database
-
-100 max ไออันติ้กๆนี่ติ้กครบอ่ะ ละก็อย่าลืมกดเชื่อม sec3_gr4_database นะ
------------------------------------
-
-เชื่อมแล้วมา สร้างไฟล์ Samote-express 
-เปิดในไฟล์ใน vscode  
-
-npm init 
-npm install สี่อัน ตามที่เขาเคยให้ทำ
-npm install multer
-
-package.json
-{
-  "name": "samote-express",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
-  "author": "Samote Group4 Sec3",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "express-session": "^1.18.1",
-    "mysql2": "^3.14.0",
-    "nodemon": "^3.1.9"
-  }
-}
-
-เอา.env เข้ามา
-
-แยกไฟล์ html
-> html
-> nodemodules
-.env
-package0lock
-package
-server.js
-
-อะไรทำนองนี้ก็โหลดๆมาจากที่นีี่แปะไป อย่าลืม  npm start หรือ  node server.js ถ้าเชื่อมดาต้าเบสไม่ได้อยากลืมว่าเลือกกดเชื่อมยังตอนทำในsql
-
-ลองๆเล่นดูติดขัดตรงไหนก็บอก ปลใ ทุกอย่างที่ไม่ใช่ห้าอันนี้ [ > nodemodules .env package0lock package server.js ] โยนเข้า html ให้หมด
+## Author
+- Name: John Doe
+- ID: 65123456
