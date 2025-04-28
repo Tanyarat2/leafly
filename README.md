@@ -63,7 +63,6 @@ This is the project for our ITCS223 Web Development Phase II.
    ```
 
 3. **Split Terminal:**
-   (Image of split terminal provided separately)
    ![Split Terminal](Example-Leafly/Readme-img/Split-Terminal.png)
 
 4. **First Terminal (Front-End Setup):**
@@ -100,16 +99,16 @@ This is the project for our ITCS223 Web Development Phase II.
    ```
    Leafly-express (root)
    ├── sec3_gr4_fe_src
-   │   ├── >css
-   │   ├── >html
-   │   ├── >images
-   │   ├── >js
-   │   ├── >node_modules
+   │   ├── css
+   │   ├── html
+   │   ├── images
+   │   ├── js
+   │   ├── node_modules
    │   ├── package-lock.json
    │   ├── package.json
    │   └── Front-End.js
    └── sec3_gr4_ws_src
-       ├── >node_modules
+       ├── node_modules
        ├── .env
        ├── package-lock.json
        ├── package.json
@@ -163,8 +162,11 @@ This is the project for our ITCS223 Web Development Phase II.
 
 ### Admin Features:
 
+![Split Terminal](Example-Leafly/Readme-img/Admin.png)
+
 - **Add Product**  
   [http://localhost:3000/add-page](http://localhost:3000/add-page)
+  ![Split Terminal](Example-Leafly/Readme-img/Addd.png)
   - Click "**Add**" card to add a new product.
   - Example Product Details:
     - Product ID: `25PLGF1601`
@@ -176,11 +178,14 @@ This is the project for our ITCS223 Web Development Phase II.
     - iPhone Model: `iPhone 16`
     - Stock: `100`
 
+
+
 - **Edit Product**  
   [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
   - Input Product ID: `25PLGF1601`, click **Search**.
+  - ![Split Terminal](Example-Leafly/Readme-img/productID_edit.png)
   - Modify any product details (e.g., change image, stock, price) then click **Confirm**.
-
+  - ![Split Terminal](Example-Leafly/Readme-img/Edit.png)
 - **Delete Product**  
   - Same as Edit, but click **Delete** to remove the product.
 
