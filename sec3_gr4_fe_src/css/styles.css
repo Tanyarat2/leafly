@@ -10,6 +10,18 @@ body {
     color: #ffffff;
 }
 
+/* map section */
+.map {
+    text-align: left;
+    margin: 30px;
+    color: #685752;
+}
+
+#map{
+    height: 500px;
+    width: 100%;
+}
+
 /* Navigation Bar */
 nav {
     /*makes two icons separate*/
@@ -106,12 +118,6 @@ a.product{
     font-size: 16px;
 }
 
-/* map section */
-.map {
-    text-align: left;
-    margin: 30px;
-    color: #685752;
-}
 
 /* Footer Section */
 footer {
