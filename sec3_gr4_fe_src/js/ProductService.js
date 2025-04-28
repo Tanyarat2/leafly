@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // ตรวจสอบสถานะการล็อกอินของแอดมิน
+        // Check admin login status by calling backend API
         const response = await fetch('http://localhost:4000/check-admin', {
             method: 'GET',
-            credentials: 'include', // ส่งคุกกี้เซสชัน
+            credentials: 'include', // Send session cookie with the request
         });
 
-        if (response.status === 401) { // ถ้าไม่ได้เป็นแอดมิน
-            window.location.href = '/login'; // รีไดเรกต์ไปหน้าล็อกอิน
+        if (response.status === 401) {
+            // If not logged in as admin, redirect to login page
+            window.location.href = '/login';
         } else {
-            // ถ้าเป็นแอดมินให้ทำสิ่งที่ต้องการในหน้าดูแลแอดมิน
+            // If admin is authenticated, continue to load the admin page
             const data = await response.json();
             console.log('Welcome admin:', data);
         }
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error checking admin status:', error);
     }
 
-    // โหลดข้อมูลสินค้า
+    // Load product data and render product cards
     try {
         const productResponse = await fetch('http://localhost:4000/search-api?');
         const products = await productResponse.json();
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             productList.appendChild(card);
         });
 
-        // เพิ่มปุ่ม "เพิ่มสินค้า"
+        // Add card
         const addCard = document.createElement('div');
         addCard.className = 'add-product-card-PS';
         addCard.innerHTML = '<div class="add-icon-PS"><a href="/add-page">+</a></div>';
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error loading products:', err);
     }
 
-    // ตั้งค่า event listener สำหรับปุ่ม logout
+    // Set up event listener for the logout button
     document.getElementById('logoutBtn').addEventListener('click', async function () {
         try {
             const response = await fetch('http://localhost:4000/admin-logout', {
@@ -55,16 +56,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', // ส่งคุกกี้เซสชัน
+                credentials: 'include', // Send session cookie with the request
             });
 
             const data = await response.json();
 
             if (data.success) {
                 console.log('Logout successful');
-                window.location.href = '/login'; // รีไดเรกต์ไปหน้าล็อกอิน
+                // Redirect to login page after successful logout
+                window.location.href = '/login'; 
             } else {
-                alert('Logout failed: ' + data.message); // แสดงข้อความผิดพลาดถ้ามี
+                alert('Logout failed: ' + data.message); 
             }
         } catch (error) {
             console.error('Error during logout:', error);
