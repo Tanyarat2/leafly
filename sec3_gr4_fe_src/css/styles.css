@@ -1,16 +1,14 @@
-/* use for home.html and team.html */
-
-/* home.html */
 /* General Styles */
 body {
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #F5F5F0;
     color: #ffffff;
+    /* font-family: Inter; */
 }
 
-/* map section */
 .map {
     text-align: left;
     margin: 30px;
@@ -22,9 +20,9 @@ body {
     width: 100%;
 }
 
+
 /* Navigation Bar */
 nav {
-    /*makes two icons separate*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,10 +38,12 @@ nav img {
     font-size: 20px;
     color: white;
     cursor: pointer;
+
 }
 
 .search-icon a {
     text-decoration: none;
+
 }
 
 .search-icon img {
@@ -56,12 +56,16 @@ header {
     padding: 20px;
 }
 
+
 header img {
     width: 230px;
-    height: 100px; 
+    /* Set the width */
+    height: 100px;
+    /* Set the height */
     background-color: #685752;
-    object-fit: contain; /* Ensures the image fills the area properly*/
-    border-radius: 10px; 
+    object-fit: contain;
+    /* Ensures the image fills the area properly*/
+    border-radius: 10px;
 }
 
 .logo {
@@ -77,6 +81,8 @@ header img {
     color: #685752;
     font-weight: bold;
 }
+
+
 
 /* Product Section */
 .product-container {
@@ -96,11 +102,14 @@ header img {
     border-radius: 10px;
 }
 
+
 .product img {
     width: 100%;
     border-radius: 10px;
     width: 170px;
+    /* Set the width */
     height: 200px;
+    /* Set the height */
     object-fit: cover;
 }
 
@@ -117,7 +126,6 @@ a.product{
     color: #ffffff;
     font-size: 16px;
 }
-
 
 /* Footer Section */
 footer {
@@ -140,6 +148,7 @@ footer {
     padding: 0 20px;
 }
 
+
 footer a {
     color: rgb(255, 255, 255);
     text-decoration: none;
@@ -147,12 +156,20 @@ footer a {
     text-decoration: underline;
 }
 
-/* for team.html */
+/* for team page */
 .teamname {
     text-align: center;
     color: #685752;
     font-weight: bold;
     font-size: large;
+}
+
+.teamname a{
+    text-align: center;
+    color: #685752;
+    font-weight: bold;
+    font-size: large;
+    font-style: italic;
 }
 
 .teampic-container {
@@ -163,23 +180,16 @@ footer a {
     padding: 20px;
 }
 
+/* .teampic {
+    background-color: #685752;
+    padding: 15px;
+    text-align: center;
+    width: 120px;
+    border-radius: 10px; 
+} */
+
 .teampic img {
     width: 120px;
     object-fit: cover;
 }
 
-/* Member contact */
-.contact-member-link {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 30px;
-    background-color: transparent; 
-}
-
-.contact-member-link a {
-    color: #685752;
-    font-weight: bold;
-    font-size: 18px;
-    text-decoration: underline;
-    font-style: italic;
-}
