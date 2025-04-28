@@ -1,7 +1,9 @@
+Here's the complete **README.md** that you can copy and paste directly:
+
+```markdown
 # Leafly Website
 
-
-This is the project for our ITCS223 Web Development Phase II
+This is the project for our ITCS223 Web Development Phase II.
 
 ---
 
@@ -16,7 +18,7 @@ This is the project for our ITCS223 Web Development Phase II
    - Password: `Hellosamote1234***`
    - Set privileges on `sec3_gr4_database`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
 
-3. **Test the database:**
+3. **Test the Database:**
    - Run SQL command:
      ```sql
      SELECT * FROM Admin_Info;
@@ -38,7 +40,7 @@ This is the project for our ITCS223 Web Development Phase II
 
 3. **Folder Structure:**
    ```
-  Leafly-express (root)
+   Leafly-express (root)
    ├── sec3_gr4_fe_src
    │   ├── css
    │   ├── html
@@ -46,7 +48,7 @@ This is the project for our ITCS223 Web Development Phase II
    │   ├── js
    │   └── Front-End.js
    └── sec3_gr4_ws_src
-       └──Back-End.js
+       └── Back-End.js
    ```
 
 ---
@@ -54,8 +56,9 @@ This is the project for our ITCS223 Web Development Phase II
 ## Running the Website
 
 1. **Open VS Code and Open Folder `Leafly-express`.**
+
 2. **Create `.env` File in `sec3_gr4_ws_src`:**
-   ```
+   ```bash
    DB_HOST=localhost
    DB_USER=Samote
    DB_PASSWORD=Hellosamote1234***
@@ -66,7 +69,7 @@ This is the project for our ITCS223 Web Development Phase II
    (Image of split terminal provided separately)
    ![Split Terminal](Example-Leafly/GreenForest.jpg)
 
-4. **First Terminal (Front-End setup):**
+4. **First Terminal (Front-End Setup):**
    ```bash
    cd sec3_gr4_fe_src
    npm init
@@ -81,7 +84,7 @@ This is the project for our ITCS223 Web Development Phase II
      }
      ```
 
-5. **Second Terminal (Back-End setup):**
+5. **Second Terminal (Back-End Setup):**
    ```bash
    cd sec3_gr4_ws_src
    npm init
@@ -95,7 +98,8 @@ This is the project for our ITCS223 Web Development Phase II
        "start": "node Back-End.js"
      }
      ```
-6.  **Folder Structure:**
+
+6. **Folder Structure:**
    ```
    Leafly-express (root)
    ├── sec3_gr4_fe_src
@@ -113,17 +117,16 @@ This is the project for our ITCS223 Web Development Phase II
        ├── package-lock.json
        ├── package.json
        └── Back-End.js
-   
    ```
 
-7. **Start both servers:**
+7. **Start Both Servers:**
    - On **both terminals**, type:
      ```bash
      npm start
      ```
-        - The front-end server will run on Port 3000.
-        - The back-end server will run on Port 4000
-        - 
+     - The **front-end server** will run on **Port 3000**.
+     - The **back-end server** will run on **Port 4000**.
+
 ---
 
 ## Open the Website
@@ -136,16 +139,16 @@ This is the project for our ITCS223 Web Development Phase II
 ## How to Use the Website
 
 ### Customer Pages:
-- **Home Page**
-  - Shows our best selling products and you can view our physical Leafly warehouse on the map below.
+- **Home Page**  
+  - Shows our best-selling products and you can view our physical Leafly warehouse on the map below.  
   [http://localhost:3000/home](http://localhost:3000/home)
 
 - **Team Page**  
-  - Shows members and Thanyatip's social media links.
-  [http://localhost:3000/team](http://localhost:3000/team)Ï
+  - Shows team members and Thanyatip's social media links.  
+  [http://localhost:3000/team](http://localhost:3000/team)
 
 - **Search Page**  
-  - You can see products with no criteria search or use advanced criteria search.
+  - You can see products with no criteria search or use advanced criteria search.  
   [http://localhost:3000/search](http://localhost:3000/search)
   - Click any product to view its details.
 
@@ -163,8 +166,8 @@ This is the project for our ITCS223 Web Development Phase II
 
 ### Admin Features:
 
-- **Add Product**
-[http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
+- **Add Product**  
+  [http://localhost:3000/add-page](http://localhost:3000/add-page)
   - Click "**Add**" card to add a new product.
   - Example Product Details:
     - Product ID: `25PLGF1601`
@@ -176,21 +179,20 @@ This is the project for our ITCS223 Web Development Phase II
     - iPhone Model: `iPhone 16`
     - Stock: `100`
 
-- **Edit Product**
+- **Edit Product**  
   [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
   - Input Product ID: `25PLGF1601`, click **Search**.
   - Modify any product details (e.g., change image, stock, price) then click **Confirm**.
 
-- **Delete Product**
+- **Delete Product**  
   - Same as Edit, but click **Delete** to remove the product.
 
-- **Logout**
+- **Logout**  
   - Click **Logout** on the bottom-right of Admin, Add, or Edit-Delete page.
 
 ---
 
-## 
-Notes
+## Notes
 
 - Admin session will expire after **3 hours**.
 - Make sure MySQL Server is running before starting the backend server.
@@ -198,15 +200,17 @@ Notes
 
 ---
 
-## Project by
+## Project By
 
 - Section 3 - Group 4  
-- 6688038 Chanikarn Kaewkomut
-- 6688049 Thanyathip Korapintavangkul
-- 6688071 Ornrumpa Nirundorn 
-- 6688117 Thanyarat Suksuwan
+- 6688038 Chanikarn Kaewkomut  
+- 6688049 Thanyatip Korapintavangkul  
+- 6688071 Ornrumpa Nirundorn  
+- 6688117 Thanyarat Suksuwan  
 - 6688120 Pannatorn Suyaoei
-- 
-```
 
 ---
+
+```
+
+You can now copy this entire block and paste it into your **README.md** file. Let me know if you need any further adjustments!
