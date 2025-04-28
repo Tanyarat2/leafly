@@ -111,7 +111,7 @@ nav img {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* center the text content */
+    align-items: flex-start; /* center the text content */
     text-align: center;
 }
 
@@ -123,6 +123,7 @@ nav img {
     align-items: center;
     border-radius: 10px;
 }
+
 
 .product-detail {
     background-color: #879283;
