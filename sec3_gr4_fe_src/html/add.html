@@ -17,10 +17,11 @@
     <span class="search-icon"><a href="/search"><img src="search.png"></a></span>
   </nav>
 
-
+  <!-- Main Content-->
   <div class="main">
     <h2>Add new product</h2>
-    <div class="product-section-add">
+
+      
       <!-- Image Upload Box -->
       <form id="add-product-form" action="/add-product" method="POST" enctype="multipart/form-data">
         <div class="img_upload">
@@ -50,11 +51,11 @@
       
           <!-- Price + Color -->
           <div class="frow">
-            <div class="fgroup half">
+            <div class="fgroup">
               <label>Price:</label>
               <input type="number" name="price" placeholder="Price..." step="0.01" min="0" required />
             </div>
-            <div class="fgroup half">
+            <div class="fgroup">
               <label>Color:</label>
               <select name="color" required>
                 <option value="" disabled selected>Select</option>
@@ -101,8 +102,8 @@
       </form>
       
       
-      </div>
     </div>
+    
 
 
  <!-- FOOTER -->
