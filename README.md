@@ -1,4 +1,4 @@
-# Leafly Website
+# Leafly Online Shopping Website
 
 This is the project for our ITCS223 Web Development Phase II.
 
