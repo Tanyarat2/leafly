@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // เช็คสถานะ Admin
+    // Check admin status
     try {
         const response = await fetch('http://localhost:4000/check-admin', {
             method: 'GET',
@@ -53,14 +53,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
             if (errorElement) errorElement.textContent = '';
 
-            const productImageFile = form.product_image.files[0]; // ดึงไฟล์จากฟอร์ม
+            const productImageFile = form.product_image.files[0]; // Get file from form
             if (!productImageFile) {
                 console.error('No image file selected');
                 if (errorElement) errorElement.textContent = 'Please select an image.';
                 return;
             }
 
-            // ฟังก์ชันแปลงไฟล์เป็น Base64
+            // Convert to base 64 function
             const toBase64 = file => new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            // เตรียมข้อมูลที่จะส่ง
+            // Prepare sending the data
             const productData = {
                 product_id: form.product_id.value,
                 product_name: form.product_name.value,
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 stock: parseInt(form.stock.value, 10),
                 collection: form.collection.value,
                 iphone_model: form.iphone_model.value,
-                product_image_base64: base64Image, // ส่งภาพ Base64
+                product_image_base64: base64Image, // Send base64 picture
             };
 
             console.log('Product Data:', productData);
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         });
-        // ฟังก์ชันย่อขนาดภาพ
+        // Image resize function
 const resizeImage = (file, maxWidth, maxHeight) => {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -140,7 +140,7 @@ const resizeImage = (file, maxWidth, maxHeight) => {
                 let canvas = document.createElement('canvas');
                 let ctx = canvas.getContext('2d');
                 
-                // คำนวณสัดส่วนการย่อ
+                // Resize calculation
                 let width = img.width;
                 let height = img.height;
                 if (width > maxWidth || height > maxHeight) {
@@ -149,12 +149,12 @@ const resizeImage = (file, maxWidth, maxHeight) => {
                     height = height * ratio;
                 }
                 
-                // ย่อภาพ
+                // Resizing
                 canvas.width = width;
                 canvas.height = height;
                 ctx.drawImage(img, 0, 0, width, height);
                 
-                // แปลงเป็น Base64
+                // Convert to Base64
                 canvas.toDataURL('image/jpeg', (err, result) => {
                     if (err) reject(err);
                     resolve(result);
@@ -167,12 +167,12 @@ const resizeImage = (file, maxWidth, maxHeight) => {
     });
 };
 
-// ใช้ฟังก์ชันในฟอร์ม:
+// Use function in form:
 const productImageFile = form.product_image.files[0];
 if (productImageFile) {
     resizeImage(productImageFile, 1024, 1024).then((resizedImage) => {
         console.log(resizedImage);
-        // ส่ง resizedImage แทน base64 image ขนาดใหญ่
+        // Send resizedImage instead of base64 image
     }).catch(err => {
         console.error('Image resize error:', err);
     });
@@ -181,7 +181,7 @@ if (productImageFile) {
         
     }
 
-    // ฟังก์ชันแสดงรูปตัวอย่าง
+    // Function to show preview image
     function previewImage(event) {
         const reader = new FileReader();
         reader.onload = function () {
@@ -196,7 +196,7 @@ if (productImageFile) {
         fileInput.addEventListener('change', previewImage);
     }
 
-    // ถ้า AbortSignal.timeout ยังไม่มีในบราวเซอร์
+    // If AbortSignal.timeout
     if (!AbortSignal.timeout) {
         AbortSignal.timeout = (ms) => {
             const controller = new AbortController();
