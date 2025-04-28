@@ -186,7 +186,7 @@ This is the project for our ITCS223 Web Development Phase II.
 
 - **Edit Product**  
   [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
-  - Input Product ID: `25PLGF1601`, click **Search**.
+  - Input Product ID: `24SMMR1401`, click **Search**.
   - ![ProductID_edit](Example-Leafly/Readme-img/ProductID_edit.png)
   - Modify any product details (e.g., change image, stock, price) then click **Confirm**.
   - ![Edit](Example-Leafly/Readme-img/Edit.png)
