@@ -13,8 +13,9 @@ This is the project for our ITCS223 Web Development Phase II.
 2. **Create MySQL User:**
    - Username: `Samote`
    - Password: `Hellosamote1234***`
+   - Authentication Type: caching_sha2_password
    - Host: localhost
-   - Resource Limits: All 100
+   - Account Limits: All 100
    - Set privileges on `sec3_gr4_database`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
 
 3. **Test the Database:**
