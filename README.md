@@ -1,6 +1,7 @@
-# Leafly Online Shopping Web application
+# Leafly Online Shopping Web Application
 
-This is the project for our ITCS223 Web Development Phase II.
+This project is developed for **ITCS223: Introduction to Web Development**.  
+Our website focuses on selling high-quality phone cases through an easy-to-use online shopping platform.
 
 ---
 
@@ -12,8 +13,8 @@ This is the project for our ITCS223 Web Development Phase II.
 
 2. **Create MySQL User:**
    - Username: `Samote`
-   - Password: `Hellosamote1234***`
    - Authentication Type: `caching_sha2_password`
+   - Password: `Hellosamote1234***`
    - Host: `localhost`
    - Account Limits:
    - Max. Queries: 0
@@ -152,7 +153,8 @@ This is the project for our ITCS223 Web Development Phase II.
   [http://localhost:3000/team](http://localhost:3000/team)
 
 - **Search Page**  
-  - You can see products with no criteria search or use advanced criteria search.  
+- You can browse all products without any search criteria, or use the advanced search to filter results.
+- Example: Keyword – `golden`
   [http://localhost:3000/search](http://localhost:3000/search)
   - Click any product to view its details.
 
