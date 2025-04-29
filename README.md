@@ -180,7 +180,7 @@ This is the project for our ITCS223 Web Development Phase II.
     - Image : **You can find it in the "Example-Leafly" folder**
     - Product ID: `25PLGF1601`
     - Product Name: `Green Forest`
-    - Description: Protect your phone with the Green Forest Phone Case, designed with vibrant, eco-friendly materials.
+    - Description: `Protect your phone with the Green Forest Phone Case, designed with vibrant, eco-friendly materials.`
     - Price: `990`
     - Color: `Green`
     - Collection: `Plain`
