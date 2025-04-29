@@ -148,7 +148,7 @@ This is the project for our ITCS223 Web Development Phase II.
   [http://localhost:3000/home](http://localhost:3000/home)
 
 - **Team Page**  
-  - Shows team members and Thanyatip's social media links.  
+  - Shows information about each team member, including their social media links in _**contact**_.. 
   [http://localhost:3000/team](http://localhost:3000/team)
 
 - **Search Page**  
