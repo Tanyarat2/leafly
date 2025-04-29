@@ -71,7 +71,7 @@ This is the project for our ITCS223 Web Development Phase II.
    ```
 
 3. **Split Terminal:**
-   ![Split Terminal](Example-Leafly/Readme-img/Split-Terminal.png)
+   ![Split Terminal](Example-Leafly/Readme-img/Split_Terminal.png)
 
 4. **First Terminal (Front-End Setup):**
    ```bash
