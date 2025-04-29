@@ -194,9 +194,13 @@ Our website focuses on selling high-quality phone cases through an easy-to-use o
   [http://localhost:3000/delete-edit-page](http://localhost:3000/delete-edit-page)
   - Input Product ID: `25PLGF1601`, click **Search**.
   - ![ProductID_edit](Example-Leafly/Readme-img/ProductID_edit.png)
-  - You can odify any product details (e.g., change image, stock, price) then click **Confirm**.
+ 
+
+  - You can modify any product details (e.g., change image, stock, price), then click **Confirm**.
   - Example Product Name: `Matcha Greentea`
   - ![Edit](Example-Leafly/Readme-img/Edit.png)
+ 
+    
 - **Delete Product**  
   - Same as Edit, but click **Delete** to remove the product.
 
