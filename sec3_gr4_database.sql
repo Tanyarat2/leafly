@@ -37,9 +37,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     expires INT UNSIGNED NOT NULL,
     data MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
     PRIMARY KEY (session_id)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_0900_ai_ci;NGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO Admin_Info (Admin_ID, First_Name, Last_Name, Address, Dateofbirth, Email) VALUES
 ('AD66047', 'Thanyathip', 'Korapintavangkul', '16 Chotisahai, rimklongprapa road, Bangsue, Bangkok 10800', '2005-09-24', 'thanyathip.kor@student.mahidol.ac.th'),
