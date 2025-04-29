@@ -153,10 +153,9 @@ Our website focuses on selling high-quality phone cases through an easy-to-use o
   [http://localhost:3000/team](http://localhost:3000/team)
 
 - **Search Page**  
-- You can browse all products without any search criteria, or use the advanced search to filter results.
+- You can browse all products without any search criteria, or use the advanced search to filter results. Click on any product to view its details.
 - Example: Keyword – `golden`
   [http://localhost:3000/search](http://localhost:3000/search)
-  - Click any product to view its details.
 
 ---
 
