@@ -17,10 +17,10 @@ Our website focuses on selling high-quality phone cases through an easy-to-use o
    - Password: `Hellosamote1234***`
    - Host: `localhost`
    - Account Limits:
-   - Max. Queries: 0
-   - Max. Updates: 100
-   - Max. Connections: 100
-   - Concurrent Connections: 100
+   - Max. Queries: `0`
+   - Max. Updates: `100`
+   - Max. Connections: `100`
+   - Concurrent Connections: `100`
    - Set privileges on `sec3_gr4_database`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
 
 3. **Test the Database:**
