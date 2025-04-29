@@ -8,7 +8,7 @@ This is the project for our ITCS223 Web Development Phase II.
 
 1. **Download and Run Database Script:**
    - Download the file `sec3_gr4_database.sql`.
-   - Import/Execute it in your MySQL Server to create a database called `sec3_gr4_database`.
+   - Import and Execute it in your MySQL Server to create a database called `sec3_gr4_database`.
 
 2. **Create MySQL User:**
    - Username: `Samote`
